@@ -6,7 +6,8 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ### - client-side -
 
--
+- Next.js
+- CSS modules
 
 ### - server-side -
 
@@ -26,27 +27,20 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ## About this repository
 
-### branch 'Master'
+### branch 'main'
+
+### branch 'dev'
 
 ## Installation
 
 ```bash
-# in the server folder
-npm i
-npm run start # node
-#or
-npm run dev # nodemon for development purposes
-
-#in the client folder
 npm i
 npm run dev
 ```
 
-## ENV ?
-
 ## What I have learned from this project
 
-a project that is growing overtime
+to-do
 
 ## What's next to do?
 
@@ -55,6 +49,7 @@ to-do
 ## Resources
 
 - https://css-tricks.com/snippets/css/animated-grainy-texture/
+- https://git-lfs.github.com./
 
 ## Team
 
