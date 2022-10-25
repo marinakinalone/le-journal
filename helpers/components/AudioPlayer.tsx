@@ -1,6 +1,6 @@
 import React from "react"
 import ReactAudioPlayer from "react-audio-player"
-import { AudioPlayerProps } from "./types"
+import { AudioPlayerProps } from "../ts-utils/types"
 
 const AudioPlayer = ({
   source,

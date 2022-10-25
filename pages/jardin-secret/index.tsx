@@ -1,17 +1,11 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import styles from "../../games/une-minute/styles/Uneminute.module.scss" // TODO: add module here
+import styles from "../../games/*/styles/*.module.scss" // TODO: add module here
 import { AudioPlayer } from "../../helpers/components"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/router"
-import { Credits, Prompt } from "../../games/une-minute"
 
 const Title: NextPage = () => {
-  const [displayPrompt, setDisplayPrompt] = useState(true);
-  const [displayAnimation, setDisplayAnimation] = useState(false);
-  const [displayCredits, setDisplayCredits] = useState(false);
-
-
   const router = useRouter()
 
   const redirectToHome = () => {
@@ -32,26 +26,16 @@ const Title: NextPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    setInterval(() => {
-      setDisplayPrompt(false);
-      setDisplayCredits(true);
-    }, 20000)
-
-  }, [displayPrompt, displayCredits])
-
   return (
     <div className={styles.container}>
       <Head>
-        <title>une minute</title>
-        <meta name="description" content="une minute, par mks" />
+        <title>title</title>
+        <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <AudioPlayer source={"./resources/une-minute/urtha1.wav"} />
-        {displayPrompt ? (<Prompt />) : (<></>)}
-        {displayCredits ? (<Credits />) : (<></>)}
+        <AudioPlayer source={""} />
       </main>
     </div>
   )
