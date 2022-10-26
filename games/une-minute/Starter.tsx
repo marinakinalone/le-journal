@@ -2,12 +2,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { silentPrompts } from './data/silentPrompts';
 import { musicPrompts } from './data/musicPrompts';
 import { Prompts } from './index'
+import { StarterProps } from './types';
 
-interface StarterProps {
-    silentDisplayTime: number
-    musicDisplayTime: number
-    setStartMusic: Dispatch<SetStateAction<boolean>>
-}
 
 const Starter = ({ silentDisplayTime, musicDisplayTime, setStartMusic }: StarterProps) => {
     const [displayMusicPrompts, setDisplayMusicPrompts] = useState(false);

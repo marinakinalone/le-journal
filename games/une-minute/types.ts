@@ -9,3 +9,9 @@ export interface PromptProps {
   data: Array<Prompt>
   setStartMusic?: Dispatch<SetStateAction<boolean>>
 }
+
+export interface StarterProps {
+  silentDisplayTime: number
+  musicDisplayTime: number
+  setStartMusic: Dispatch<SetStateAction<boolean>>
+}
