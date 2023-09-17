@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# le journal
 
-## Getting Started
+One of my most personal projects. Something between an interactive diary and a video game. A lot of love translated into code.
 
-First, run the development server:
+## Built with
+
+### - client-side -
+
+- Next.js
+- CSS modules
+
+### - server-side -
+
+-
+
+### - database -
+
+-
+
+### - devops -
+
+-
+
+## Deployment
+
+[coming](https://)
+
+## About this repository
+
+### branch 'main'
+
+### branch 'dev'
+
+## Installation
 
 ```bash
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## What I have learned from this project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+to-do
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## What's next to do?
 
-## Learn More
+to-do
 
-To learn more about Next.js, take a look at the following resources:
+## Resources
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- https://css-tricks.com/snippets/css/animated-grainy-texture/
+- https://git-lfs.github.com./
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Team
 
-## Deploy on Vercel
+| [![Marina Kinalone Simonnet](https://avatars.githubusercontent.com/u/63544936?v=3&s=144)](https://github.com/marinakinalone) |
+| ---------------------------------------------------------------------------------------------------------------------------- |
+| [Marina Kinalone Simonnet](https://github.com/marinakinalone)                                                                |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+MIT © [Marina Kinalone Simonnet](https://github.com/marinakinalone)
