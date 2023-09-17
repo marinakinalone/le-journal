@@ -34,8 +34,10 @@ One of my most personal projects. Something between an interactive diary and a v
 ## Installation
 
 ```bash
-npm i
-npm run dev
+
+nvm use
+bun i
+bun run dev
 ```
 
 ## What I have learned from this project

@@ -1,3 +1,3 @@
 export interface ContentProps {
-  content: string | undefined
+  content: string | undefined;
 }
