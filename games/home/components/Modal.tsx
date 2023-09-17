@@ -1,7 +1,7 @@
 import React from "react"
-import styles from "./styles/Modal.module.scss"
-import { games } from "./data/games"
-import { MusicCredit } from "."
+import { games } from "../../../main/data/games"
+import styles from "../styles/Modal.module.scss"
+import MusicCredit from "./MusicCredit"
 
 const Modal = () => {
   //TODO: map data.
@@ -10,13 +10,13 @@ const Modal = () => {
       <div className={styles.wrapper}>
         <h2>musique</h2>
         <ul>
-          {games.map((game) => {
+          {games.map(({title, artist, song}) => {
             return (
               <MusicCredit
-                key={game.title}
-                game={game.title}
-                artist={game.artist}
-                song={game.song}
+                key={title}
+                game={title}
+                artist={artist}
+                song={song}
               />
             )
           })}

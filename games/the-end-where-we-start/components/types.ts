@@ -1,3 +1,3 @@
-export interface ContentProps {
+export interface IContentProps {
   content: string | undefined;
 }
