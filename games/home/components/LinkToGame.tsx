@@ -1,10 +1,13 @@
-import React from "react"
-import styles from "./styles/Home.module.scss"
-import Link from "next/link"
 import cx from "classnames"
-import { LinkToGameProps } from "./types"
+import Link from "next/link"
+import React from "react"
+import styles from "../styles/Home.module.scss"
 
-const LinkToGame = ({ title }: LinkToGameProps) => {
+export interface ILinkToGameProps {
+  title: string;
+}
+
+const LinkToGame = ({ title }: ILinkToGameProps) => {
   const getUrl = (title: string) => {
     return title.replaceAll(" ", "-")
   }
