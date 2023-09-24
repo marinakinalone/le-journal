@@ -39,10 +39,11 @@ const Home: NextPage = () => {
             return <LinkToGame key={game.title} title={game.title} />
           })}
         </ul>
-        
+
         {displayModal && <Modal />}
 
         <footer className={styles.footer}>
+          {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
           <p>un projet imaginé par <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">mks</a> © 2022 // <button className={styles.footer__btn} onClick={() => openModal()}>musique</button> // <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">GitHub</a></p>
         </footer>
       </main>

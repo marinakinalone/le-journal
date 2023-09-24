@@ -1,72 +1,73 @@
-import type { NextPage } from "next"
-import Head from "next/head"
-import styles from "../../games/une-minute/styles/Uneminute.module.scss" // TODO: add module here
-import { AudioPlayer } from "../../helpers/components"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/router"
-import { Credits, Starter, HeartAnimation, StartTimer } from "."
-import { silentPrompts } from "./data/silentPrompts"
-import { musicPrompts } from "./data/musicPrompts"
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import styles from '../../games/une-minute/styles/Uneminute.module.scss' // TODO: add module here
+import AudioPlayer from '../../main/components/AudioPlayer'
+import Credits from './Credits'
+import HeartAnimation from './HeartAnimation'
+import StartTimer from './StartTimer'
+import Starter from './Starter'
+import { musicPrompts } from './data/musicPrompts'
+import { silentPrompts } from './data/silentPrompts'
 
 const Title: NextPage = () => {
-  const [displayPrompt, setDisplayPrompt] = useState(true);
-  const [startMusic, setStartMusic] = useState(false);
+  const [displayPrompt, setDisplayPrompt] = useState(true)
+  const [startMusic, setStartMusic] = useState(false)
   const [displayStartTimer, setDisplayStartTimer] = useState(false)
-  const [displayAnimation, setDisplayAnimation] = useState(false);
-  const [displayCredits, setDisplayCredits] = useState(false);
+  const [displayAnimation, setDisplayAnimation] = useState(false)
+  const [displayCredits, setDisplayCredits] = useState(false)
 
   const timeline = {
     start: 500, // 7000
     startWithMusic: 2200, //2200
     countdown: 3000, //3000
     oneMinute: 60000, //60000
-    end: 15000 //10000
+    end: 15000, //10000
   }
 
-  const startTime = (timeline.start * silentPrompts.length) + (timeline.startWithMusic * musicPrompts.length)
-
+  const startTime =
+    timeline.start * silentPrompts.length + timeline.startWithMusic * musicPrompts.length
 
   const router = useRouter()
 
   const redirectToHome = () => {
-    router.push("/")
+    router.push('/')
   }
 
   useEffect(() => {
     const handleKeyDown = (event: { key: string }) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         redirectToHome()
       }
     }
-    window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener('keydown', handleKeyDown)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-
     if (displayPrompt) {
       setTimeout(() => {
-        setDisplayPrompt(false);
-        setDisplayStartTimer(true);
+        setDisplayPrompt(false)
+        setDisplayStartTimer(true)
       }, startTime)
     }
 
-
     if (displayStartTimer) {
       setTimeout(() => {
-        setDisplayStartTimer(false);
-        setDisplayAnimation(true);
+        setDisplayStartTimer(false)
+        setDisplayAnimation(true)
       }, timeline.countdown)
     }
 
     if (displayAnimation) {
       setTimeout(() => {
-        setDisplayAnimation(false);
-        setDisplayCredits(true);
+        setDisplayAnimation(false)
+        setDisplayCredits(true)
       }, timeline.oneMinute)
     }
 
@@ -76,6 +77,7 @@ const Title: NextPage = () => {
       }, timeline.end)
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayPrompt, displayCredits, displayStartTimer, displayAnimation])
 
   return (
@@ -87,17 +89,23 @@ const Title: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        {startMusic ? <AudioPlayer source={'./resources/une-minute/urtha1.wav'} /> : <></>}
 
-        {startMusic ? (<AudioPlayer source={"./resources/une-minute/urtha1.wav"} />) : (<></>)}
+        {displayPrompt ? (
+          <Starter
+            silentDisplayTime={timeline.start}
+            musicDisplayTime={timeline.startWithMusic}
+            setStartMusic={setStartMusic}
+          />
+        ) : (
+          <></>
+        )}
 
-        {displayPrompt ? (<Starter silentDisplayTime={timeline.start} musicDisplayTime={timeline.startWithMusic} setStartMusic={setStartMusic} />) : (<></>)}
+        {displayStartTimer ? <StartTimer /> : <></>}
 
-        {displayStartTimer ? (<StartTimer />) : (<></>)}
+        {displayAnimation ? <HeartAnimation /> : <></>}
 
-        {displayAnimation ? (<HeartAnimation />) : (<></>)}
-
-        {displayCredits ? (<Credits />) : (<></>)}
-
+        {displayCredits ? <Credits /> : <></>}
       </main>
     </div>
   )

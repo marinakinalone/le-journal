@@ -2,18 +2,24 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "extends": [
+    "next",
+    "next/core-web-vitals",
     "eslint:recommended",
-    "plugin:@next/next/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended"
   ],
   "plugins": ["@typescript-eslint", "react", "react-hooks", "import"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020, // You can update this to your desired ECMAScript version
+    "sourceType": "module"
+  },
   "settings": {
     "react": {
       "version": "detect"
     }
-  },
-  "env": {
-    "browser": true
   },
   "rules": {
     "no-var": "warn",
