@@ -1,11 +1,12 @@
-import type { NextPage } from "next"
-import Head from "next/head"
-import { useEffect, useState } from "react"
-import AudioPlayer from "../../main/components/AudioPlayer"
-import { games } from "../../main/data/games"
-import LinkToGame from "./components/LinkToGame"
-import Modal from "./components/Modal"
-import styles from "./styles/Home.module.scss"
+/* eslint-disable react/jsx-no-comment-textnodes */
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import AudioPlayer from '../../main/components/AudioPlayer'
+import { games } from '../../main/data'
+import LinkToGame from './components/LinkToGame'
+import Modal from './components/Modal'
+import styles from './styles/Home.module.scss'
 
 const Home: NextPage = () => {
   const [displayModal, setDisplayModal] = useState(false)
@@ -13,14 +14,14 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: { key: string }) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         setDisplayModal(false)
       }
     }
-    window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [displayModal])
   return (
@@ -32,9 +33,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <AudioPlayer source={"./resources/home/boardwalk.wav"} />
+        <AudioPlayer source={'./resources/home/boardwalk.wav'} />
         <h1>le journal</h1>
         <ul className={styles.entries}>
+          {/* TODO : use the correct data */}
           {games.map((game) => {
             return <LinkToGame key={game.title} title={game.title} />
           })}
@@ -44,7 +46,20 @@ const Home: NextPage = () => {
 
         <footer className={styles.footer}>
           {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-          <p>un projet imaginé par <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">mks</a> © 2022 // <button className={styles.footer__btn} onClick={() => openModal()}>musique</button> // <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+          <p>
+            un projet imaginé par{' '}
+            <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
+              mks
+            </a>{' '}
+            © 2022 //{' '}
+            <button className={styles.footer__btn} onClick={() => openModal()}>
+              musique
+            </button>{' '}
+            //{' '}
+            <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </p>
         </footer>
       </main>
     </div>
