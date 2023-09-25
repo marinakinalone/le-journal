@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import AudioPlayer from '../../main/components/AudioPlayer'
+
+// TODO use hook
 import { games } from '../../main/data'
 import LinkToGame from './components/LinkToGame'
 import Modal from './components/Modal'
@@ -10,10 +11,11 @@ import styles from './styles/Home.module.scss'
 
 const Home: NextPage = () => {
   const [displayModal, setDisplayModal] = useState(false)
+
   const openModal = () => setDisplayModal(true)
 
   useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setDisplayModal(false)
       }
@@ -26,19 +28,12 @@ const Home: NextPage = () => {
   }, [displayModal])
   return (
     <div className={styles.container}>
-      <Head>
-        <title>le journal</title>
-        <meta name="description" content="un journal intime interactif" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <AudioPlayer source={'./resources/home/boardwalk.wav'} />
         <h1>le journal</h1>
         <ul className={styles.entries}>
-          {/* TODO : use the correct data */}
           {games.map((game) => {
-            return <LinkToGame key={game.title} title={game.title} />
+            return <LinkToGame key={game.id} {...game} />
           })}
         </ul>
 
@@ -51,7 +46,7 @@ const Home: NextPage = () => {
             <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
               mks
             </a>{' '}
-            © 2022 //{' '}
+            © {`${new Date().getFullYear()}`} //{' '}
             <button className={styles.footer__btn} onClick={() => openModal()}>
               musique
             </button>{' '}

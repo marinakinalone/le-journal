@@ -1,55 +1,45 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect } from 'react'
+import React, { createContext, ReactNode, useState } from 'react'
 
 // TODO can probably extend data interface
 interface IGameContext {
-  title: string
-  description: string
+  title?: string
+  description?: string
+  faviconSrc?: string
   children?: ReactNode
 }
 
-export const GameContext = createContext<IGameContext>({
-  title: '',
+export const GameContext = createContext({
+  title: '', // Provide default values or leave them empty as needed
   description: '',
+  faviconSrc: '',
+  updateGameContext: (_newContext: Partial<IGameContext>) => {},
 })
 
 const GameProvider = ({
   title = 'le journal',
   description = 'un journal intime interactif',
+  faviconSrc = './favico.ico',
   children,
 }: IGameContext) => {
-  // TODO make it Navigation Provider
-  const router = useRouter()
+  const [gameContext, setGameContext] = useState({
+    title,
+    description,
+    faviconSrc,
+    updateGameContext: (newContext: Partial<IGameContext>) => {
+      setGameContext((prevContext) => ({
+        ...prevContext,
+        ...newContext,
+      }))
+    },
+  })
 
-  const redirectToHome = () => {
-    router.push('/')
-  }
-
-  useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
-      if (event.key === 'Escape') {
-        redirectToHome()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
   return (
-    <GameContext.Provider
-      value={{
-        title,
-        description,
-      }}
-    >
+    <GameContext.Provider value={gameContext}>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="icon" href="/favicon.ico" />
+        <title>{gameContext.title}</title>
+        <meta name="description" content={gameContext.description} />
+        <link rel="icon" href={gameContext.faviconSrc} />
       </Head>
 
       <main>{children}</main>
