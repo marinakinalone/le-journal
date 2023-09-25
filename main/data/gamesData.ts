@@ -1,7 +1,7 @@
-import { IgameInfo } from './gameTypes'
+import { IgameBasicData } from './gameTypes'
 
 //TODO update game list with description and favicon
-export const gamesData: IgameInfo[] = [
+export const gamesData: IgameBasicData[] = [
   {
     title: 'the end where we start',
     music: {

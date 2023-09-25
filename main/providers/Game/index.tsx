@@ -1,50 +1,41 @@
 import Head from 'next/head'
 import React, { createContext, ReactNode, useState } from 'react'
+import { IgameInfo } from '../../data/gameTypes'
+import { homePageData as initialGameContext } from '../../data/homePageData'
 
-// TODO can probably extend data interface
-interface IGameContext {
-  title?: string
-  description?: string
-  faviconSrc?: string
+interface IGameContext extends IgameInfo {
+  updateGameContext: (newContext: IgameInfo) => void
   children?: ReactNode
 }
 
-export const GameContext = createContext({
-  title: '', // Provide default values or leave them empty as needed
-  description: '',
-  faviconSrc: '',
-  updateGameContext: (_newContext: Partial<IGameContext>) => {},
+export const GameContext = createContext<IGameContext>({
+  ...initialGameContext,
+  updateGameContext: (_newContext) => {},
 })
 
-const GameProvider = ({
-  title = 'le journal',
-  description = 'un journal intime interactif',
-  faviconSrc = './favico.ico',
-  children,
-}: IGameContext) => {
-  const [gameContext, setGameContext] = useState({
-    title,
-    description,
-    faviconSrc,
-    updateGameContext: (newContext: Partial<IGameContext>) => {
-      setGameContext((prevContext) => ({
-        ...prevContext,
-        ...newContext,
-      }))
-    },
-  })
+const GameInfoProvider = ({ children }: IGameContext) => {
+  const [gameContext, setGameContext] = useState(initialGameContext)
 
   return (
-    <GameContext.Provider value={gameContext}>
+    <GameContext.Provider
+      value={{
+        ...gameContext,
+        updateGameContext: (newContext) => {
+          setGameContext((prevContext) => ({
+            ...prevContext,
+            ...newContext,
+          }))
+        },
+      }}
+    >
       <Head>
         <title>{gameContext.title}</title>
-        <meta name="description" content={gameContext.description} />
-        <link rel="icon" href={gameContext.faviconSrc} />
+        <meta name="description" content={gameContext.metadata.description} />
+        <link rel="icon" href={gameContext.metadata.favicon} />
       </Head>
-
       <main>{children}</main>
     </GameContext.Provider>
   )
 }
 
-export default GameProvider
+export default GameInfoProvider

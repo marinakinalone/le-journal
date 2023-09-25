@@ -1,20 +1,20 @@
-export interface Imusic {
+export interface IgameMusic {
   artist: string
   song: string
   source: string
 }
 
-export interface Imetadata {
+export interface IgameMetadata {
   favicon: string
   description: string
 }
 
-export interface IgameInfo {
+export interface IgameBasicData {
   title: string
-  music?: Imusic
-  metadata: Imetadata
+  music?: IgameMusic
+  metadata: IgameMetadata
 }
 
-export interface Igame extends IgameData {
+export interface IgameInfo extends IgameBasicData {
   id: string
 }
