@@ -1,16 +1,17 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { isLandscapeOrientation, isMobileDevice, isTabletDevice } from './utils'
+import { isLandscapeOrientation, isMobileDevice } from './utils'
 
 interface INavigationContext {
   children?: ReactNode
-  isLandscape: boolean
 }
 
 export const NavigationContext = createContext<INavigationContext>({})
 
 const NavigationProvider = ({ children }: INavigationContext) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
+
+  const isSupportedDevice = !isMobileDevice()
 
   const router = useRouter()
 
@@ -32,33 +33,30 @@ const NavigationProvider = ({ children }: INavigationContext) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleOrientationChange = () => {
-    if (isLandscapeOrientation()) {
-      redirectToHome()
-    }
-  }
-
   useEffect(() => {
     const handleResize = () => {
       setIsLandscape(isLandscapeOrientation())
     }
 
     window.addEventListener('resize', handleResize)
-    window.addEventListener('orientationchange', handleOrientationChange)
 
     return () => {
       window.removeEventListener('resize', handleResize)
-      window.removeEventListener('orientationchange', handleOrientationChange)
     }
   }, [])
 
   useEffect(() => {
-    if (!isLandscape) {
+    if (!isLandscape || !isSupportedDevice) {
       router.push('/format-not-supported')
     }
-  }, [isLandscape, router])
 
-  return <NavigationContext.Provider value={{ isLandscape }}>{children}</NavigationContext.Provider>
+    if (isLandscape && isSupportedDevice) {
+      redirectToHome()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLandscape])
+
+  return <NavigationContext.Provider value={{}}>{children}</NavigationContext.Provider>
 }
 
 export default NavigationProvider
