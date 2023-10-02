@@ -15,6 +15,7 @@
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@types/ua-parser-js": "^0.7.37",
     "@typescript-eslint/eslint-plugin": "latest",
     "classnames": "^2.3.2",
     "eslint": "8.49.0",
@@ -25,6 +26,7 @@
     "react-audio-player": "^0.17.0",
     "react-dom": "latest",
     "sass": "^1.67.0",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "ua-parser-js": "^1.0.36"
   }
 }

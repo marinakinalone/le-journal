@@ -29,7 +29,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <AudioPlayer source={'./resources/home/boardwalk.wav'} />
+        <AudioPlayer source={'/resources/home/boardwalk.wav'} />
         <h1>le journal</h1>
         <ul className={styles.entries}>
           {games.map((game) => {
