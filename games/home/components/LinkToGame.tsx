@@ -25,6 +25,7 @@ const LinkToGame = ({ ...game }) => {
         </span>
         <span className={styles.wrapper}>
           <span className={styles.text}>{game.title}</span>
+
           <span className={cx(styles.arrow, styles.right)}>
             <span className={styles.shaft}></span>
           </span>

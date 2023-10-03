@@ -4,9 +4,9 @@ import Loader from '../../main/components/Loader'
 
 const GamePage = () => {
   const router = useRouter()
-  const { slug } = router.query
+  const { id } = router.query
 
-  const GameComponent = dynamic(() => import(`../../games/${slug}/index.tsx`), {
+  const GameComponent = dynamic(() => import(`../../games/${id}/index.tsx`), {
     loading: () => <Loader />,
     ssr: false,
   })

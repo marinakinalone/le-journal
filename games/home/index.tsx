@@ -27,8 +27,8 @@ const Home: NextPage = () => {
     }
   }, [displayModal])
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div className={styles.container__background_default}>
+      <section className={styles.container}>
         <AudioPlayer source={'/resources/home/boardwalk.wav'} />
         <h1>le journal</h1>
         <ul className={styles.entries}>
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
             </a>
           </p>
         </footer>
-      </main>
+      </section>
     </div>
   )
 }

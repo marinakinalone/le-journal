@@ -88,7 +88,7 @@ const Title: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <section className={styles.main}>
         {startMusic ? <AudioPlayer source={'./resources/une-minute/urtha1.wav'} /> : <></>}
 
         {displayPrompt ? (
@@ -106,7 +106,7 @@ const Title: NextPage = () => {
         {displayAnimation ? <HeartAnimation /> : <></>}
 
         {displayCredits ? <Credits /> : <></>}
-      </main>
+      </section>
     </div>
   )
 }

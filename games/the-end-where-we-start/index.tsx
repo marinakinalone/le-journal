@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styles from '../../games/the-end-where-we-start/styles/Tewws.module.scss'
 import AudioPlayer from '../../main/components/AudioPlayer'
-import useGameData from '../../main/hooks/useGameData'
+// import useGameData from '../../main/hooks/useGameData'
 import Headline from './components/Headline'
 import Paragraph from './components/Paragraph'
 import Title from './components/Title'
@@ -78,11 +78,11 @@ const TheEndWhereWeStart: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <main className={styles.main} onClick={() => handleClick()}>
+      <section className={styles.main} onClick={() => handleClick()}>
         {/* replace with the correct data */}
         <AudioPlayer source={'/resources/the-end-where-we-start/wave.mp3'} />
         {displayTextBlock(textblocks[index])}
-      </main>
+      </section>
     </div>
   )
 }
