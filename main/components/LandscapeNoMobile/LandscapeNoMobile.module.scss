@@ -28,45 +28,53 @@
   position: absolute;
 }
 
-.landscape_0 {
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideLeftReturn;
+$fadeInProps: (
+  name: fadeIn,
+  duration: 0.2s,
+  opacity: 0,
+);
+
+$slideLeftProps: (
+  name: slideLeftReturn,
+  duration: 0.9s,
+);
+
+$slideRightProps: (
+  name: slideRightReturn,
+  duration: 0.9s,
+);
+
+// TODO move to mixins
+@mixin animation-properties($name, $delay, $duration, $fillMode: both, $opacity: null) {
+  animation-name: $name;
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-fill-mode: $fillMode;
+  opacity: $opacity;
 }
 
-.landscape_1 {
-  animation-delay: 0.15s;
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideRightReturn;
-}
+@for $i from 0 to 6 {
+  $delay: 0.15s * $i;
 
-.landscape_2 {
-  animation-delay: 0.3s;
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideLeftReturn;
-}
-
-.landscape_3 {
-  animation-delay: 0.45s;
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideRightReturn;
-}
-
-.landscape_4 {
-  animation-delay: 0.5s;
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideLeftReturn;
-}
-
-.landscape_5 {
-  animation-delay: 0.6s;
-  animation-duration: 0.9s;
-  animation-fill-mode: both;
-  animation-name: slideRightReturn;
+  @if $i % 2 == 0 {
+    $slideRightClassName: unquote('.landscape_#{$i}');
+    #{$slideRightClassName} {
+      @include animation-properties(
+        map-get($slideRightProps, name),
+        $delay,
+        map-get($slideRightProps, duration)
+      );
+    }
+  } @else {
+    $slideLeftClassName: unquote('.landscape_#{$i}');
+    #{$slideLeftClassName} {
+      @include animation-properties(
+        map-get($slideLeftProps, name),
+        $delay,
+        map-get($slideLeftProps, duration)
+      );
+    }
+  }
 }
 
 .landscape_6 {
