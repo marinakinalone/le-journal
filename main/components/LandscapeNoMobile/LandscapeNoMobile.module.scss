@@ -1,4 +1,5 @@
-@import '../../../styles/animations.scss', '../../../styles/variables.scss';
+@import '../../../styles/animations.scss', '../../../styles/mixins.scss',
+  '../../../styles/variables.scss';
 
 .container {
   position: absolute;
@@ -34,6 +35,8 @@ $fadeInProps: (
   opacity: 0,
 );
 
+$fadeInInitialDelay: 1.5s;
+
 $slideLeftProps: (
   name: slideLeftReturn,
   duration: 0.9s,
@@ -43,15 +46,6 @@ $slideRightProps: (
   name: slideRightReturn,
   duration: 0.9s,
 );
-
-// TODO move to mixins
-@mixin animation-properties($name, $delay, $duration, $fillMode: both, $opacity: null) {
-  animation-name: $name;
-  animation-delay: $delay;
-  animation-duration: $duration;
-  animation-fill-mode: $fillMode;
-  opacity: $opacity;
-}
 
 @for $i from 0 to 6 {
   $delay: 0.15s * $i;
@@ -85,84 +79,18 @@ $slideRightProps: (
   opacity: 0;
 }
 
-.landscape_7 {
-  animation-delay: 1.5s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
+@for $i from 7 to 17 {
+  $delay: $fadeInInitialDelay;
+  $fadeInInitialDelay: $delay + 0.12s;
 
-.landscape_8 {
-  animation-delay: 1.6s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_9 {
-  animation-delay: 1.7s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_10 {
-  animation-delay: 1.8s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_11 {
-  animation-delay: 1.9s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_12 {
-  animation-delay: 2s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_13 {
-  animation-delay: 2.1s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_14 {
-  animation-delay: 2.2s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_15 {
-  animation-delay: 2.3s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
-}
-
-.landscape_16 {
-  animation-delay: 2.4s;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-  opacity: 0;
+  $fadeInClassName: unquote('.landscape_#{$i}');
+  #{$fadeInClassName} {
+    @include animation-properties(
+      map-get($fadeInProps, name),
+      $delay,
+      map-get($fadeInProps, duration) map-get($fadeInProps, opacity)
+    );
+  }
 }
 
 .landscape_17 {
