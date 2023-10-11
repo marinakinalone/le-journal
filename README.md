@@ -6,7 +6,7 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ### - client-side -
 
-- Next.js
+- NextJS
 - CSS modules
 
 ### - server-side -
@@ -29,7 +29,7 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ### branch 'main'
 
-### branch 'dev'
+### branch 'development'
 
 ## Installation
 
@@ -52,6 +52,7 @@ to-do
 
 - https://css-tricks.com/snippets/css/animated-grainy-texture/
 - https://git-lfs.github.com./
+- https://www.toptal.com/developers/css/sprite-generator
 
 ## Team
 
