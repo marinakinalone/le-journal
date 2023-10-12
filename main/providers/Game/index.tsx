@@ -31,7 +31,9 @@ const GameInfoProvider = ({ children }: IGameContext) => {
       <Head>
         <title>{gameContext.title}</title>
         <meta name="description" content={gameContext.metadata.description} />
-        <link rel="icon" href={gameContext.metadata.favicon} />
+        <link rel="apple-touch-icon" sizes="180x180" href={gameContext.favicons.appleTouchIcon} />
+        <link rel="icon" type="image/png" sizes="32x32" href={gameContext.favicons.favicon32} />
+        <link rel="icon" type="image/png" sizes="16x16" href={gameContext.favicons.favicon16} />
       </Head>
       <main>{children}</main>
     </GameContext.Provider>

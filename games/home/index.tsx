@@ -42,7 +42,9 @@ const Home: NextPage = () => {
 
         <ul className={styles.entries}>
           {games.map((game) => {
-            return <LinkToGame key={game.id} {...game} />
+            if (!game.hidden) {
+              return <LinkToGame key={game.id} {...game} />
+            }
           })}
         </ul>
 

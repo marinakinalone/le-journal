@@ -11,7 +11,6 @@ export const gamesData: IgameBasicData[] = [
     },
     metadata: {
       description: 'Une page de mon journal écrite pendant le premier confinement en 202',
-      favicon: './favico.ico',
     },
   },
   {
@@ -23,7 +22,6 @@ export const gamesData: IgameBasicData[] = [
     },
     metadata: {
       description: 'une minute, par mks',
-      favicon: '',
     },
   },
   {
@@ -35,10 +33,45 @@ export const gamesData: IgameBasicData[] = [
     },
     metadata: {
       description: 'une minute, par mks',
-      favicon: '',
     },
   },
   {
+    title: 'rallumer la femme',
+    music: {
+      artist: 'artist',
+      song: 'song',
+      source: 'atticsandbasements.wav',
+    },
+    metadata: {
+      description: ', par mks',
+    },
+  },
+  {
+    new: true,
+    title: 'radio',
+    music: {
+      artist: 'artist',
+      song: 'song',
+      source: 'atticsandbasements.wav',
+    },
+    metadata: {
+      description: ', par mks',
+    },
+  },
+  {
+    new: true,
+    title: 'palettes',
+    music: {
+      artist: 'artist',
+      song: 'song',
+      source: 'atticsandbasements.wav',
+    },
+    metadata: {
+      description: ', par mks',
+    },
+  },
+  {
+    new: true,
     title: 'jardin secret',
     music: {
       artist: 'Mama Aiuto',
@@ -47,10 +80,10 @@ export const gamesData: IgameBasicData[] = [
     },
     metadata: {
       description: '',
-      favicon: '',
     },
   },
   {
+    hidden: true,
     title: 'end credits',
     music: {
       artist: 'Tom Misch',
@@ -59,7 +92,18 @@ export const gamesData: IgameBasicData[] = [
     },
     metadata: {
       description: '',
-      favicon: '',
+    },
+  },
+  {
+    hidden: true,
+    title: 'NEW GAME',
+    music: {
+      artist: 'artist',
+      song: 'song',
+      source: 'source.wav',
+    },
+    metadata: {
+      description: ', par mks',
     },
   },
 ]

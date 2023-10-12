@@ -4,6 +4,10 @@ import React from 'react'
 import useGameData from '../../../main/hooks/useGameData'
 import styles from '../styles/Home.module.scss'
 
+const NewGameLabel = () => {
+  return <span>*NEW GAME* </span>
+}
+
 const LinkToGame = ({ ...game }) => {
   const { updateCurrentGameData } = useGameData()
 
@@ -12,6 +16,8 @@ const LinkToGame = ({ ...game }) => {
       ...game,
     })
   }
+
+  const GameTitle = () => <span className={styles.text}>{game.title}</span>
 
   return (
     <li>
@@ -24,7 +30,10 @@ const LinkToGame = ({ ...game }) => {
           <span className={styles.shaft}></span>
         </span>
         <span className={styles.wrapper}>
-          <span className={styles.text}>{game.title}</span>
+          <span className={styles.text}>
+            {game.new ? <NewGameLabel /> : <></>}
+            <GameTitle />
+          </span>
 
           <span className={cx(styles.arrow, styles.right)}>
             <span className={styles.shaft}></span>
