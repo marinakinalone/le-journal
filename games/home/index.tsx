@@ -1,13 +1,18 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import AudioPlayer from '../../main/components/AudioPlayer'
-
-// TODO use hook
 import { games } from '../../main/data'
 import LinkToGame from './components/LinkToGame'
 import Modal from './components/Modal'
 import styles from './styles/Home.module.scss'
+
+/*
+TODO: 
+- add loader and get the data from the provider
+- animate the list: typing animation for the title + feather, slide right for the game links
+*/
 
 const Home: NextPage = () => {
   const [displayModal, setDisplayModal] = useState(false)
@@ -30,7 +35,11 @@ const Home: NextPage = () => {
     <div className={styles.container__background_default}>
       <section className={styles.container}>
         <AudioPlayer source={'/resources/home/boardwalk.wav'} />
-        <h1>le journal</h1>
+        <h1>
+          le journal
+          <Image src="/resources/home/feather.png" alt="" width={70} height={70} />
+        </h1>
+
         <ul className={styles.entries}>
           {games.map((game) => {
             return <LinkToGame key={game.id} {...game} />
