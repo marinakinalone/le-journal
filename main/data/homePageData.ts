@@ -1,3 +1,6 @@
+/* 
+This is the initial data we need for the home page.
+*/
 export const homePageData = {
   id: 'le-journal',
   title: 'le journal',
