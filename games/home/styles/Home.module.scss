@@ -1,4 +1,13 @@
-@import '../../../styles/fonts', '../../../styles/utilities', '../../../styles/variables';
+@import '../../../styles/animations', '../../../styles/fonts', '../../../styles/mixins',
+  '../../../styles/utilities', '../../../styles/variables';
+
+// Variables
+$numberOfGames: 7;
+$displayListAnimationDuration: 3s;
+$slideLeftProps: (
+  name: slideLeftReturn,
+  duration: 0.9s,
+);
 
 .container {
   margin-left: 10%;
@@ -30,6 +39,11 @@
       text-decoration: none;
     }
   }
+  @include animation-properties(
+    map-get($slideLeftProps, name),
+    $displayListAnimationDuration + 0.5,
+    map-get($slideLeftProps, duration)
+  );
 }
 
 .footer__btn {
@@ -223,5 +237,21 @@ $arrow-head-thickness: $shaft-thickness;
     > .arrow {
       position: relative;
     }
+  }
+}
+
+//-------------------------
+// GAME LIST ANIMATION
+//-------------------------
+
+@for $i from 0 through $numberOfGames {
+  $delay: ($displayListAnimationDuration / $numberOfGames * $i);
+  $slideLeftClassName: unquote('.game_#{$i}');
+  #{$slideLeftClassName} {
+    @include animation-properties(
+      map-get($slideLeftProps, name),
+      $delay,
+      map-get($slideLeftProps, duration)
+    );
   }
 }

@@ -1,5 +1,5 @@
 /* 
-This is the initial data we need for the home page.
+This is the initial data we need for the home page (with the list of the games.
 */
 export const homePageData = {
   id: 'le-journal',

@@ -1,0 +1,17 @@
+name: CD Le Journal
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '**'
+jobs:
+  build:
+    name: 'build-pnp-checkout'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Lint/test
+        run: |
+          npm ci
+          npm run lint

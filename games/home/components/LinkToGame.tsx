@@ -8,7 +8,14 @@ const NewGameLabel = () => {
   return <span>*NEW GAME* </span>
 }
 
-const LinkToGame = ({ ...game }) => {
+interface ILinkToGame {
+  title: string
+  id: string
+  new?: boolean
+  index: number
+}
+
+const LinkToGame = ({ index, ...game }: ILinkToGame) => {
   const { updateCurrentGameData } = useGameData()
 
   const handleClick = () => {
@@ -16,11 +23,10 @@ const LinkToGame = ({ ...game }) => {
       ...game,
     })
   }
-
   const GameTitle = () => <span className={styles.text}>{game.title}</span>
 
   return (
-    <li>
+    <li className={styles[`game_${index}`]}>
       <Link
         href={`/game/${game.id}`}
         className={cx(styles.entry, styles.animated_arrow)}
