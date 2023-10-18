@@ -1,7 +1,7 @@
 import React from 'react'
-import mainStyles from '../../../games/home/styles/Home.module.scss'
-import styles from './LandscapeNoMobile.module.scss'
+import mainStyles from '../../../games/home/styles/GameMenu.module.scss'
 import LandscapeAnimation from './LandscapeAnimation'
+import styles from './LandscapeNoMobile.module.scss'
 
 const STRINGS = {
   description:

@@ -1,9 +1,9 @@
 import React from 'react'
-import { games } from '../../../main/data'
-import styles from '../styles/Modal.module.scss'
+import { games } from '../../../../main/data'
+import styles from '../../styles/Modal.module.scss'
 import MusicCredit from './MusicCredit'
 
-const Modal = () => {
+const MusicModal = () => {
   return (
     <section className={styles.modal}>
       <div className={styles.wrapper}>
@@ -19,4 +19,4 @@ const Modal = () => {
   )
 }
 
-export default Modal
+export default MusicModal
