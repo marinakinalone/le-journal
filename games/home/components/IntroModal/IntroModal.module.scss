@@ -1,0 +1,44 @@
+@import '../../../../styles/variables';
+
+.modal {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta__frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 27rem;
+  border: 1px solid $black;
+  background-color: $white;
+  padding: 1.5rem 3rem 2rem;
+}
+
+.cta__button {
+  margin-top: 2rem;
+  border: 1px solid $black;
+  padding: 0.5rem 2rem;
+  background-color: $white;
+  font-family: $font-primary;
+  &:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+}
+
+.title__container {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.title__image {
+}

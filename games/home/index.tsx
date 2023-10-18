@@ -11,7 +11,7 @@ TODO:
 */
 
 const Home: NextPage = () => {
-  const [displayIntroModal, setDisplayIntroModal] = useState(false)
+  const [displayIntroModal, setDisplayIntroModal] = useState(true)
 
   const closeIntroModal = () => setDisplayIntroModal(false)
 

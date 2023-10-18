@@ -1,8 +1,8 @@
 import cx from 'classnames'
 import Link from 'next/link'
 import React from 'react'
-import useGameData from '../../../main/hooks/useGameData'
-import styles from '../styles/GameMenu.module.scss'
+import useGameData from '../../../../main/hooks/useGameData'
+import styles from './GameMenu.module.scss'
 
 const NewGameLabel = () => {
   return <span>*NEW GAME* </span>

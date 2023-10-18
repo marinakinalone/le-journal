@@ -1,5 +1,5 @@
 import React from 'react'
-import mainStyles from '../../../games/home/styles/GameMenu.module.scss'
+import mainStyles from '../../../games/home/components/GameMenu/GameMenu.module.scss'
 import LandscapeAnimation from './LandscapeAnimation'
 import styles from './LandscapeNoMobile.module.scss'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { games } from '../../../../main/data'
-import styles from '../../styles/Modal.module.scss'
 import MusicCredit from './MusicCredit'
+import styles from './MusicModal.module.scss'
 
 const MusicModal = () => {
   return (

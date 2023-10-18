@@ -1,5 +1,5 @@
-@import '../../../styles/animations', '../../../styles/fonts', '../../../styles/mixins',
-  '../../../styles/utilities', '../../../styles/variables';
+@import '../../../../styles/animations', '../../../../styles/fonts', '../../../../styles/mixins',
+  '../../../../styles/utilities', '../../../../styles/variables';
 
 // Variables
 $numberOfGames: 7;
@@ -8,6 +8,22 @@ $slideLeftProps: (
   name: slideLeftReturn,
   duration: 0.9s,
 );
+
+//-------------------------
+// GAME LIST ANIMATION
+//-------------------------
+
+@for $i from 0 through $numberOfGames {
+  $delay: ($displayListAnimationDuration / $numberOfGames * $i);
+  $slideLeftClassName: unquote('.game_#{$i}');
+  #{$slideLeftClassName} {
+    @include animation-properties(
+      map-get($slideLeftProps, name),
+      $delay,
+      map-get($slideLeftProps, duration)
+    );
+  }
+}
 
 .container {
   margin-left: 10%;
@@ -237,21 +253,5 @@ $arrow-head-thickness: $shaft-thickness;
     > .arrow {
       position: relative;
     }
-  }
-}
-
-//-------------------------
-// GAME LIST ANIMATION
-//-------------------------
-
-@for $i from 0 through $numberOfGames {
-  $delay: ($displayListAnimationDuration / $numberOfGames * $i);
-  $slideLeftClassName: unquote('.game_#{$i}');
-  #{$slideLeftClassName} {
-    @include animation-properties(
-      map-get($slideLeftProps, name),
-      $delay,
-      map-get($slideLeftProps, duration)
-    );
   }
 }

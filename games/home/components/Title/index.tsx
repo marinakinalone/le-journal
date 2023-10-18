@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const MainTitle = () => {
+const Title = () => {
   return (
     <h1>
       le journal
@@ -10,4 +10,4 @@ const MainTitle = () => {
   )
 }
 
-export default MainTitle
+export default Title

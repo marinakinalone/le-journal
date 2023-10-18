@@ -1,11 +1,11 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import AudioPlayer from '../../../main/components/AudioPlayer'
-import { games } from '../../../main/data'
-import LinkToGame from '../components/LinkToGame'
-import MusicModal from '../components/MusicModal'
-import styles from '../styles/GameMenu.module.scss'
-import MainTitle from './MainTitle'
+import AudioPlayer from '../../../../main/components/AudioPlayer'
+import { games } from '../../../../main/data'
+import MusicModal from '../MusicModal'
+import Title from '../Title'
+import styles from './GameMenu.module.scss'
+import LinkToGame from './LinkToGame'
 
 const GameMenu = () => {
   const [displayMusicModal, setDisplayMusicModal] = useState(false)
@@ -27,7 +27,7 @@ const GameMenu = () => {
     <div className={styles.container__background_default}>
       <section className={styles.container}>
         <AudioPlayer source={'/resources/home/boardwalk.wav'} />
-        <MainTitle />
+        <Title />
 
         <ul className={styles.entries}>
           {games.map((game, index) => {
@@ -40,15 +40,16 @@ const GameMenu = () => {
         {displayMusicModal && <MusicModal />}
 
         <footer className={styles.footer}>
-          {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
           <p>
             un projet imaginé par{' '}
             <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
               mks
             </a>{' '}
-            © {`${new Date().getFullYear()}`} //{' '}
+            {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}©{' '}
+            {`${new Date().getFullYear()}`} //{' '}
             <button className={styles.footer__btn} onClick={() => openMusicModal()}>
               musique
+              {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
             </button>{' '}
             //{' '}
             <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
