@@ -13,7 +13,7 @@ export const GameContext = createContext<IGameContext>({
   updateGameContext: (_newContext) => {},
 })
 
-const GameInfoProvider = ({ children }: IGameContext) => {
+const GameInfoProvider = ({ children }: { children: ReactNode }) => {
   const [gameContext, setGameContext] = useState(initialGameContext)
 
   return (
