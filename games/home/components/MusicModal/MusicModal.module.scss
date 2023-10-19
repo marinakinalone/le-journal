@@ -1,4 +1,4 @@
-@import '../../../../styles/fonts', '../../../../styles/variables';
+@use 'styles/variables' as *;
 
 .modal {
   color: $white;
@@ -41,4 +41,15 @@
   100% {
     top: -200%;
   }
+}
+
+// TODO: I don't like this, find a 'real' icon on the nounproject
+.button__close {
+  position: fixed;
+  left: 90%;
+  border: none;
+  background-color: inherit;
+  color: $white;
+  font-family: 'Sue Ellen Francisco', cursive;
+  font-size: 2rem;
 }

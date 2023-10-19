@@ -1,5 +1,8 @@
-@import '../../../../styles/animations', '../../../../styles/fonts', '../../../../styles/mixins',
-  '../../../../styles/utilities', '../../../../styles/variables';
+@use 'styles/mixins' as *;
+@use 'styles/animations' as *;
+@use 'styles/variables' as *;
+@use 'styles/fonts' as *;
+@use 'styles/utilities' as *;
 
 // Variables
 $numberOfGames: 7;

@@ -1,3 +1,2 @@
-@import
-  '../../../styles/fonts',
-  '../../../styles/variables';
+@use 'styles/fonts' as *;
+@use 'styles/variables' as *;

@@ -1,5 +1,6 @@
-@import '../../../styles/animations.scss', '../../../styles/mixins.scss',
-  '../../../styles/variables.scss';
+@use 'styles/animations' as *;
+@use 'styles/mixins' as *;
+@use 'styles/variables' as *;
 
 .container {
   position: absolute;

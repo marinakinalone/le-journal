@@ -6,12 +6,15 @@ import styles from './MusicModal.module.scss'
 const MusicModal = () => {
   return (
     <section className={styles.modal}>
+      <button className={styles.button__close}>x</button>
       <div className={styles.wrapper}>
         <h2>musique</h2>
         <ul>
-          {games.map(({ title, music }) => {
-            const { artist, song } = music
-            return <MusicCredit key={title} game={title} artist={artist} song={song} />
+          {games.map(({ title, music, hidden }) => {
+            if (!hidden) {
+              const { artist, song } = music
+              return <MusicCredit key={title} game={title} artist={artist} song={song} />
+            }
           })}
         </ul>
       </div>
