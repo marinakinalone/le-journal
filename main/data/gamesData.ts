@@ -1,6 +1,6 @@
 import { IgameBasicData } from './gameTypes'
 
-//TODO update game list with description and favicon
+//TODO update game list with description
 export const gamesData: IgameBasicData[] = [
   {
     title: 'the end where we start',
@@ -10,7 +10,7 @@ export const gamesData: IgameBasicData[] = [
       source: 'wave.mp3',
     },
     metadata: {
-      description: 'Une page de mon journal écrite pendant le premier confinement en 202',
+      description: 'Une page de mon journal écrite pendant le premier confinement en 2020',
     },
   },
   {

@@ -3,13 +3,17 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
 
 interface INavigationContext {
+  displayIntroModal: boolean
+  setDisplayIntroModal: React.Dispatch<React.SetStateAction<boolean>>
   children?: ReactNode
 }
 
-export const NavigationContext = createContext<INavigationContext>({})
+export const NavigationContext = createContext<INavigationContext | null>(null)
 
 const NavigationProvider = ({ children }: INavigationContext) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
+  const [displayIntroModal, setDisplayIntroModal] = useState(true)
+  console.log('displayIntroModal', displayIntroModal)
 
   const isSupportedDevice = !isMobileDevice()
 
@@ -56,7 +60,11 @@ const NavigationProvider = ({ children }: INavigationContext) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLandscape])
 
-  return <NavigationContext.Provider value={{}}>{children}</NavigationContext.Provider>
+  return (
+    <NavigationContext.Provider value={{ displayIntroModal, setDisplayIntroModal }}>
+      {children}
+    </NavigationContext.Provider>
+  )
 }
 
 export default NavigationProvider

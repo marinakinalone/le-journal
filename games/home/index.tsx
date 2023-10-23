@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import type { NextPage } from 'next'
-import { useState } from 'react'
+import useNavigation from '../../main/hooks/useNavigation'
 import GameMenu from './components/GameMenu'
 import IntroModal from './components/IntroModal'
 
@@ -11,7 +11,7 @@ TODO:
 */
 
 const Home: NextPage = () => {
-  const [displayIntroModal, setDisplayIntroModal] = useState(true)
+  const { displayIntroModal, setDisplayIntroModal } = useNavigation()
 
   const closeIntroModal = () => setDisplayIntroModal(false)
 
