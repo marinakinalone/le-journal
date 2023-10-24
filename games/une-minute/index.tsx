@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styles from '../../games/une-minute/styles/Uneminute.module.scss'
 import AudioPlayer from '../../main/components/AudioPlayer'
+import useNavigation from '../../main/hooks/useNavigation'
 import Credits from './Credits'
 import HeartAnimation from './HeartAnimation'
 import StartTimer from './StartTimer'
@@ -18,6 +18,8 @@ const Title: NextPage = () => {
   const [displayAnimation, setDisplayAnimation] = useState(false)
   const [displayCredits, setDisplayCredits] = useState(false)
 
+  const { redirectToHome } = useNavigation()
+
   const timeline = {
     start: 500, // 7000
     startWithMusic: 2200, //2200
@@ -28,26 +30,6 @@ const Title: NextPage = () => {
 
   const startTime =
     timeline.start * silentPrompts.length + timeline.startWithMusic * musicPrompts.length
-
-  const router = useRouter()
-
-  const redirectToHome = () => {
-    router.push('/')
-  }
-
-  useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
-      if (event.key === 'Escape') {
-        redirectToHome()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   useEffect(() => {
     if (displayPrompt) {

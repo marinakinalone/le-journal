@@ -1,12 +1,22 @@
 import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
+import type { AppProps as NextAppProps } from 'next/app'
+import { ReactNode } from 'react'
 import GameInfoProvider from '../main/providers/Game'
-import NavigationProvider from '../main/providers/Navigation'
+import NavigationProvider, { INavigationContext } from '../main/providers/Navigation'
+
+interface AppProps extends NextAppProps {
+  children: ReactNode
+}
+
+const navigationProps: INavigationContext = {
+  displayIntroModal: false,
+  redirectToHome: () => {},
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <GameInfoProvider>
-      <NavigationProvider displayIntroModal={false}>
+      <NavigationProvider {...navigationProps}>
         <Component {...pageProps} />
       </NavigationProvider>
     </GameInfoProvider>

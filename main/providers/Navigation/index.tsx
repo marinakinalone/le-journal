@@ -2,9 +2,10 @@ import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
 
-interface INavigationContext {
+export interface INavigationContext {
   displayIntroModal: boolean
   setDisplayIntroModal?: React.Dispatch<React.SetStateAction<boolean>>
+  redirectToHome: () => void
   children?: ReactNode
 }
 
@@ -60,7 +61,7 @@ const NavigationProvider = ({ children }: INavigationContext) => {
   }, [isLandscape])
 
   return (
-    <NavigationContext.Provider value={{ displayIntroModal, setDisplayIntroModal }}>
+    <NavigationContext.Provider value={{ displayIntroModal, setDisplayIntroModal, redirectToHome }}>
       {children}
     </NavigationContext.Provider>
   )

@@ -8,9 +8,7 @@ const useNavigation = () => {
     throw new Error('useNavigation must be used within a NavigationProvider')
   }
 
-  const { displayIntroModal, setDisplayIntroModal } = navigationContext
-
-  return { displayIntroModal, setDisplayIntroModal }
+  return { ...navigationContext }
 }
 
 export default useNavigation

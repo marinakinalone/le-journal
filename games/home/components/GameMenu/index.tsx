@@ -23,6 +23,7 @@ const GameMenu = () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [displayMusicModal])
+
   return (
     <div className={styles.container__background_default}>
       <section className={styles.container}>

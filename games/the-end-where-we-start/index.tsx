@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styles from '../../games/the-end-where-we-start/styles/Tewws.module.scss'
 import AudioPlayer from '../../main/components/AudioPlayer'
 // import useGameData from '../../main/hooks/useGameData'
+import useNavigation from '../../main/hooks/useNavigation'
 import Headline from './components/Headline'
 import Paragraph from './components/Paragraph'
 import Title from './components/Title'
@@ -13,7 +13,7 @@ import { textblocks } from './data/textblocks'
 
 const TheEndWhereWeStart: NextPage = () => {
   const [index, setIndex] = useState(0)
-  const router = useRouter()
+  const { redirectToHome } = useNavigation()
 
   const displayTextBlock = (textblock: any) => {
     switch (Object.keys(textblock)[0]) {
@@ -38,15 +38,8 @@ const TheEndWhereWeStart: NextPage = () => {
     }
   }
 
-  const redirectToHome = () => {
-    router.push('/')
-  }
-
   useEffect(() => {
     const handleKeyDown = (event: { key: string }) => {
-      // if (event.key === 'Escape') {
-      //     redirectToHome()
-      // }
       if (event.key === 'ArrowRight') {
         if (index + 1 === textblocks.length) {
           redirectToHome()
