@@ -6,7 +6,7 @@ import NavigationProvider from '../main/providers/Navigation'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <GameInfoProvider>
-      <NavigationProvider>
+      <NavigationProvider displayIntroModal={false}>
         <Component {...pageProps} />
       </NavigationProvider>
     </GameInfoProvider>

@@ -4,7 +4,7 @@ import { isLandscapeOrientation, isMobileDevice } from './utils'
 
 interface INavigationContext {
   displayIntroModal: boolean
-  setDisplayIntroModal: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayIntroModal?: React.Dispatch<React.SetStateAction<boolean>>
   children?: ReactNode
 }
 
@@ -12,8 +12,7 @@ export const NavigationContext = createContext<INavigationContext | null>(null)
 
 const NavigationProvider = ({ children }: INavigationContext) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
-  const [displayIntroModal, setDisplayIntroModal] = useState(true)
-  console.log('displayIntroModal', displayIntroModal)
+  const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
 
   const isSupportedDevice = !isMobileDevice()
 

@@ -37,7 +37,7 @@ const GameMenu = () => {
           })}
         </ul>
 
-        {displayMusicModal && <MusicModal />}
+        {displayMusicModal && <MusicModal setDisplayMusicModal={setDisplayMusicModal} />}
 
         <footer className={styles.footer}>
           <p>
