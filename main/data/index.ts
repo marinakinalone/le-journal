@@ -2,7 +2,6 @@ import { gamesData } from './gamesData'
 
 const getIdFromGameTitle = (title: string) => title.replace(/ /g, '-').toLocaleLowerCase()
 
-//TODO generate favicon + music source links automatically
 export const games = gamesData.map((game) => {
   const { title, music, hidden } = game
   return {

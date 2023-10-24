@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import styles from '../../games/une-minute/styles/Uneminute.module.scss' // TODO: add module here
+import styles from '../../games/une-minute/styles/Uneminute.module.scss'
 import AudioPlayer from '../../main/components/AudioPlayer'
 import Credits from './Credits'
 import HeartAnimation from './HeartAnimation'

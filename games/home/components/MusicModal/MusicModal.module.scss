@@ -43,14 +43,12 @@
   }
 }
 
-// TODO: I don't like this, find a 'real' icon on the nounproject
 .button__close {
   position: fixed;
   top: 2%;
   left: 92%;
   border: none;
   background-color: inherit;
-  color: $white;
   &:hover {
     cursor: pointer;
   }
