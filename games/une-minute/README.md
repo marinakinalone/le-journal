@@ -1,10 +1,10 @@
-# [Game Name]
+# [une minute]
 
-A brief description of the game.
+Une minute pour soi et toutes les personnes qui nous aiment et nous ont aimé.e.s
 
 ## Table of Contents
 
-- [\[Game Name\]](#game-name)
+- [\[une minute\]](#une-minute)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Built with](#built-with)
@@ -12,11 +12,12 @@ A brief description of the game.
 
 ## Description
 
-Provide a detailed description of the game, its purpose, and any unique characteristics that make it stand out in your project.
+One minute break to invite the people who has loved us. I watched _The Extraordinary Mr Rogers_ and found that scene in the café so powerful.
 
 ## Built with
 
-- List the technologies and frameworks used for this specific game.
+- NextJS
+- CSS modules
 
 ## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 

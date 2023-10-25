@@ -1,10 +1,10 @@
-# [Game Name]
+# [the end where we start]
 
-A brief description of the game.
+Une page de mon journal écrite pendant le premier confinement en 2020.
 
 ## Table of Contents
 
-- [\[Game Name\]](#game-name)
+- [\[the end where we start\]](#the-end-where-we-start)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Built with](#built-with)
@@ -12,11 +12,12 @@ A brief description of the game.
 
 ## Description
 
-Provide a detailed description of the game, its purpose, and any unique characteristics that make it stand out in your project.
+The starting point of _le journal_ project. One day, I heard _Wave_ from Pogo and had the idea of making a page of my diary an interactive letter with background music.
 
 ## Built with
 
-- List the technologies and frameworks used for this specific game.
+- NextJS
+- CSS modules
 
 ## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 
