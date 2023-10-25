@@ -5,7 +5,7 @@ import useGameData from '../../../../main/hooks/useGameData'
 import styles from './GameMenu.module.scss'
 
 const NewGameLabel = () => {
-  return <span>*NEW GAME* </span>
+  return <span>*NEW* </span>
 }
 
 interface ILinkToGame {
