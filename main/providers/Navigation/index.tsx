@@ -11,7 +11,7 @@ export interface INavigationContext {
 
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
-const NavigationProvider = ({ children }: INavigationContext) => {
+const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
   const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
 

@@ -21,7 +21,8 @@ export const gamesData: IgameBasicData[] = [
       source: 'urtha1.wav',
     },
     metadata: {
-      description: 'une minute, par mks',
+      description:
+        'Une minute pour soi et toutes les personnes qui nous aiment et nous ont aimé.e.s',
     },
   },
   {
@@ -32,7 +33,7 @@ export const gamesData: IgameBasicData[] = [
       source: 'atticsandbasements.wav',
     },
     metadata: {
-      description: 'une minute, par mks',
+      description: ', par mks',
     },
   },
   {

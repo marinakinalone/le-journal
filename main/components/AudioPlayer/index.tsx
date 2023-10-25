@@ -8,7 +8,7 @@ interface IAudioPlayerProps {
 }
 
 const AudioPlayer = ({ source, autoPlay = true, loop = true }: IAudioPlayerProps) => {
-  console.log(source)
+  console.log('music has started') //TODO download music and remove.
   return <ReactAudioPlayer src={source} autoPlay={autoPlay} loop={loop} />
 }
 

@@ -1,15 +1,11 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import styles from '../../games/the-end-where-we-start/styles/Tewws.module.scss'
-import AudioPlayer from '../../main/components/AudioPlayer'
-// import useGameData from '../../main/hooks/useGameData'
 import useNavigation from '../../main/hooks/useNavigation'
 import Headline from './components/Headline'
 import Paragraph from './components/Paragraph'
 import Title from './components/Title'
 import { textblocks } from './data/textblocks'
-
-//TODO use hook to get AudioPlayer source
+import styles from './styles/TheEndWhereWeStart.module.scss'
 
 const TheEndWhereWeStart: NextPage = () => {
   const [index, setIndex] = useState(0)
@@ -19,8 +15,10 @@ const TheEndWhereWeStart: NextPage = () => {
     switch (Object.keys(textblock)[0]) {
       case 'h1':
         return <Headline content={textblock.h1} />
+
       case 'h2':
         return <Title content={textblock.h2} />
+
       default:
         if (textblock.p === 'nous commence.') {
           return (
@@ -71,9 +69,7 @@ const TheEndWhereWeStart: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <section className={styles.main} onClick={() => handleClick()}>
-        {/* replace with the correct data */}
-        <AudioPlayer source={'/resources/the-end-where-we-start/wave.mp3'} />
+      <section className={styles.main} onClick={handleClick}>
         {displayTextBlock(textblocks[index])}
       </section>
     </div>
