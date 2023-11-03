@@ -1,3 +1,5 @@
+@use 'styles/mixins' as *;
+
 @keyframes loaderSpriteAnimation {
   from {
     background-position-x: 0px;
@@ -15,9 +17,6 @@
 }
 
 .loader__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-center-column;
   height: 100vh;
 }

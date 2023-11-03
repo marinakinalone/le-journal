@@ -1,12 +1,10 @@
 @use 'styles/variables' as *;
+@use 'styles/mixins' as *;
 
 .modal {
   height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-center-column;
 }
 
 .cta__frame {
@@ -14,14 +12,14 @@
   flex-direction: column;
   align-items: center;
   width: 27rem;
-  border: 1px solid $black;
+  @include border-simple;
   background-color: $white;
   padding: 1.5rem 3rem 2rem;
 }
 
 .cta__button {
   margin-top: 2rem;
-  border: 1px solid $black;
+  @include border-simple;
   padding: 0.5rem 2rem;
   background-color: $white;
   font-family: $font-primary;

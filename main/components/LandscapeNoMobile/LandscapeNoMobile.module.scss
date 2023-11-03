@@ -6,14 +6,11 @@
   position: absolute;
   top: 10%;
   height: 80%;
-  border: 1px solid $black;
+  @include border-simple;
   background-color: $white;
   padding: 1.5rem;
   margin-right: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-center-column;
   p {
     text-align: center;
   }
@@ -89,7 +86,9 @@ $slideRightProps: (
     @include animation-properties(
       map-get($fadeInProps, name),
       $delay,
-      map-get($fadeInProps, duration) map-get($fadeInProps, opacity)
+      map-get($fadeInProps, duration),
+      both,
+      map-get($fadeInProps, opacity)
     );
   }
 }
