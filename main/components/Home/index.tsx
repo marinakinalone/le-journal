@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { experiences } from './data/experiences'
-import LinkToExperience from './components/LinkToExperience'
-import styles from './styles/Home.module.scss'
+import { experiences } from '../../data'
+import LinkToExperience from '../LinkToExperience'
+import styles from '../../styles/Main.module.scss'
+import Title from '../Title'
 
 const Home: NextPage = () => {
   const [displayModal, setDisplayModal] = useState(false)
@@ -30,13 +31,14 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1>le journal</h1>
+        <Title />
         <ul className={styles.entries}>
-          {experiences.map((experience) => {
-            return <LinkToExperience key={experience.title} title={experience.title} />
+          {experiences.map((experience, index) => {
+            if (!experience.hidden) {
+              return <LinkToExperience key={experience.id} index={index} {...experience} />
+            }
           })}
         </ul>
-
         <footer className={styles.footer}>
           <p>
             un projet imaginé par{' '}
