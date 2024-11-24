@@ -35,6 +35,7 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ```bash
 
+nvm use
 bun i
 bun run dev
 ```
