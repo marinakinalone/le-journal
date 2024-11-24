@@ -2,6 +2,7 @@ import { IexperienceBasicData } from './experiencesTypes'
 
 export const experiencesData: IexperienceBasicData[] = [
   {
+    hidden: true,
     title: 'jardin graphique',
     metadata: {
       description: 'TBD', // TODO Add description
@@ -22,7 +23,7 @@ export const experiencesData: IexperienceBasicData[] = [
     },
   },
   {
-    hidden: true,
+    new: true,
     title: 'une minute',
     metadata: {
       description: 'TBD', // TODO Add description
