@@ -1,20 +1,19 @@
-import cx from "classnames"
-import Link from "next/link"
-import React from "react"
-import styles from "../styles/Home.module.scss"
+import cx from 'classnames'
+import Link from 'next/link'
+import React from 'react'
+import styles from '../styles/Home.module.scss'
 
-export interface ILinkToGameProps {
-  title: string;
+export interface ILinkToExperienceProps {
+  title: string
 }
 
-const LinkToGame = ({ title }: ILinkToGameProps) => {
+const LinkToExperience = ({ title }: ILinkToExperienceProps) => {
   const getUrl = (title: string) => {
-    return title.replaceAll(" ", "-")
+    return title.replaceAll(' ', '-')
   }
   return (
     <li>
       <Link href={getUrl(title)} className={cx(styles.entry, styles.animated_arrow)}>
-
         <span className={cx(styles.arrow, styles.left)}>
           <span className={styles.shaft}></span>
         </span>
@@ -24,10 +23,9 @@ const LinkToGame = ({ title }: ILinkToGameProps) => {
             <span className={styles.shaft}></span>
           </span>
         </span>
-
       </Link>
     </li>
-  );
+  )
 }
 
-export default LinkToGame
+export default LinkToExperience

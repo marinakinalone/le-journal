@@ -1,4 +1,9 @@
-@import 'variables';
+@use 'variables' as *;
+@use 'animations' as *;
+@use 'fonts' as *;
+@use 'mixins' as *;
+@use 'utilities' as *;
+@use 'sprites' as *;
 
 html,
 body {

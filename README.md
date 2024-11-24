@@ -2,24 +2,24 @@
 
 One of my most personal projects. Something between an interactive diary and a video game. A lot of love translated into code.
 
+## Table of Contents
+
+- [le journal](#le-journal)
+  - [Table of Contents](#table-of-contents)
+  - [Built with](#built-with)
+  - [Deployment](#deployment)
+  - [About this repository](#about-this-repository)
+    - [branch 'main'](#branch-main)
+    - [branch 'development'](#branch-development)
+  - [Installation](#installation)
+  - [Resources](#resources)
+  - [Team](#team)
+  - [License](#license)
+
 ## Built with
 
-### - client-side -
-
-- Next.js
+- NextJS
 - CSS modules
-
-### - server-side -
-
--
-
-### - database -
-
--
-
-### - devops -
-
--
 
 ## Deployment
 
@@ -29,29 +29,21 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ### branch 'main'
 
-### branch 'dev'
+### branch 'development'
 
 ## Installation
 
 ```bash
 
-nvm use
 bun i
 bun run dev
 ```
-
-## What I have learned from this project
-
-to-do
-
-## What's next to do?
-
-to-do
 
 ## Resources
 
 - https://css-tricks.com/snippets/css/animated-grainy-texture/
 - https://git-lfs.github.com./
+- https://www.toptal.com/developers/css/sprite-generator
 
 ## Team
 
@@ -61,4 +53,4 @@ to-do
 
 ## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 
-MIT © [Marina Kinalone Simonnet](https://github.com/marinakinalone)
+CC BY-NC-SA 4.0. © [Marina Kinalone Simonnet](https://github.com/marinakinalone)
