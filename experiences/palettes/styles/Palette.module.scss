@@ -1,0 +1,54 @@
+.square {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.palettesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  place-items: center;
+  max-width: 1232px;
+  margin: 0 auto;
+}
+
+.blob {
+  position: absolute;
+}
+
+.primary {
+  height: 100%;
+}
+
+.secondary {
+  height: 90px;
+}
+
+.tertiary {
+  height: 60px;
+}
+
+// TODO keep this for minimalist view
+// .square {
+//   width: 400px;
+//   height: 400px;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+// .palettesContainer {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 16px;
+//   place-items: center;
+//   max-width: 1232px;
+//   margin: 0 auto;
+// }
+
+// .blob {
+//   position: absolute;
+//   z-index: 0;
+//   height: 100%;
+// }
