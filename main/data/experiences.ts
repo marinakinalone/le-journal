@@ -2,9 +2,37 @@ import { IexperienceBasicData } from './experiencesTypes'
 
 export const experiencesData: IexperienceBasicData[] = [
   {
-    title: 'the end where we start',
+    title: 'jardin graphique',
     metadata: {
-      description: 'Une page de mon journal écrite pendant le premier confinement en 2020',
+      description: 'TBD', // TODO Add description
+    },
+  },
+  {
+    hidden: true,
+    title: 'palettes',
+    metadata: {
+      description: 'TBD', // TODO Add description
+    },
+  },
+  {
+    hidden: true,
+    title: 'fenêtres',
+    metadata: {
+      description: 'TBD', // TODO Add description
+    },
+  },
+  {
+    hidden: true,
+    title: 'une minute',
+    metadata: {
+      description: 'TBD', // TODO Add description
+    },
+  },
+  {
+    hidden: true,
+    title: 'digital quilts',
+    metadata: {
+      description: 'TBD', // TODO Add description
     },
   },
 ]
