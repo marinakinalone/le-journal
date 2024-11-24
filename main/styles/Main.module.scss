@@ -1,14 +1,14 @@
-@import "../../../styles/fonts", "../../../styles/variables";
+@import '../../styles/fonts', '../../styles/variables';
 
 .container {
-  background-image: url("/resources/home/noise.png");
+  background-image: url('/resources/home/noise.png');
   min-height: 100vh;
 }
 
 .container::after {
   animation: grain 8s steps(10) infinite;
-  background-image: url("/resources/home/paper.png");
-  content: "";
+  background-image: url('/resources/home/paper.png');
+  content: '';
   height: 300%;
   left: -50%;
   opacity: 0.3;
@@ -170,7 +170,7 @@ $arrow-head-thickness: $shaft-thickness;
     &:before,
     &:after {
       background-color: $black;
-      content: "";
+      content: '';
       display: block;
       height: $arrow-head-thickness;
       position: absolute;

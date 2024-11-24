@@ -1,8 +1,24 @@
-import "../styles/globals.scss";
-import type { AppProps } from "next/app";
+import '../styles/globals.scss'
+import type { AppProps as NextAppProps } from 'next/app'
+import { ReactNode } from 'react'
+import AudioProvider from '../main/providers/Audio'
+import ExperienceInfoProvider from '../main/providers/Experience'
+import NavigationProvider from '../main/providers/Navigation'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+interface AppProps extends NextAppProps {
+  children: ReactNode
 }
 
-export default MyApp;
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ExperienceInfoProvider>
+      <NavigationProvider>
+        <AudioProvider>
+          <Component {...pageProps} />
+        </AudioProvider>
+      </NavigationProvider>
+    </ExperienceInfoProvider>
+  )
+}
+
+export default MyApp
