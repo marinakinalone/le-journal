@@ -1,0 +1,22 @@
+@use 'styles/mixins' as *;
+
+@keyframes loaderSpriteAnimation {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: -12100px;
+  } /* (55 images * 220px */
+}
+
+.loader__sprite {
+  width: 220px;
+  height: 220px;
+  background: url('/resources/main/animations/loader/sprite_loader.png');
+  animation: loaderSpriteAnimation 10s steps(55) infinite;
+}
+
+.loader__container {
+  @include flex-center-column;
+  height: 100vh;
+}
