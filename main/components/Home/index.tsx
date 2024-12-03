@@ -1,27 +1,29 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import { experiences } from '../../data'
-import LinkToExperience from '../LinkToExperience'
 import styles from '../../styles/Main.module.scss'
+import LinkToExperience from '../LinkToExperience'
 import Title from '../Title'
 
 const Home: NextPage = () => {
-  const [displayModal, setDisplayModal] = useState(false)
-  const openModal = () => setDisplayModal(true)
+  // TODO add modal back
+  // const [displayModal, setDisplayModal] = useState(false)
+  // const openModal = () => setDisplayModal(true)
 
-  useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
-      if (event.key === 'Escape') {
-        setDisplayModal(false)
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
+  // useEffect(() => {
+  //   const handleKeyDown = (event: { key: string }) => {
+  //     if (event.key === 'Escape') {
+  //       setDisplayModal(false)
+  //     }
+  //   }
+  //   window.addEventListener('keydown', handleKeyDown)
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [displayModal])
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyDown)
+  //   }
+  // }, [displayModal])
+
   return (
     <div className={styles.container}>
       <Head>

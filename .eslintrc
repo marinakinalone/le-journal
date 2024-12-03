@@ -1,11 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended",
-    "plugin:@next/next/recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@next/next/recommended", "plugin:react/recommended"],
   "plugins": ["@typescript-eslint", "react", "react-hooks", "import"],
   "settings": {
     "react": {
@@ -13,7 +9,8 @@
     }
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "rules": {
     "no-var": "warn",
