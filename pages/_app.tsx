@@ -10,6 +10,7 @@ interface AppProps extends NextAppProps {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log('MyApp')
   return (
     <ExperienceInfoProvider>
       <NavigationProvider>
