@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { AudioContext } from '../../providers/Audio'
+import { CustomAudioContext } from '../../providers/Audio'
 
 const useAudio = () => {
-  const audioContext = useContext(AudioContext)
+  const audioContext = useContext(CustomAudioContext)
 
   return { ...audioContext }
 }

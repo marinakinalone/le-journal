@@ -8,14 +8,14 @@ interface IAudioContext {
   children?: ReactNode
 }
 
-export const AudioContext = createContext<IAudioContext | null>(null)
+export const CustomAudioContext = createContext<IAudioContext | null>(null)
 
 const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [startAudio, setStartAudio] = useState(true)
   const { music } = useExperienceData()
 
   return (
-    <AudioContext.Provider
+    <CustomAudioContext.Provider
       value={{
         startAudio,
         setStartAudio,
@@ -23,7 +23,7 @@ const AudioProvider = ({ children }: { children: ReactNode }) => {
     >
       {startAudio && music && <AudioPlayer source={music.source} />}
       {children}
-    </AudioContext.Provider>
+    </CustomAudioContext.Provider>
   )
 }
 
