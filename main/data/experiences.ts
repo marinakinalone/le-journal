@@ -2,8 +2,7 @@ import { IexperienceBasicData } from './experiencesTypes'
 
 export const experiencesData: IexperienceBasicData[] = [
   {
-    hidden: true,
-    title: 'jardin graphique',
+    title: 'jardinage graphique',
     metadata: {
       description: 'TBD', // TODO Add description
     },
