@@ -14,9 +14,9 @@ export const palettes: IPalette[] = [
     name: 'cool molitor',
     colors: {
       background: '#f5b3b0',
-      primary: '#73d4d9',
+      primary: '#7fbfc9',
       secondary: '#f5d467',
-      accents: ['#e87d91', '#8fcbd9', '#66737d'],
+      accents: ['#e87d91', '#73d4d9', '#66737d'],
     },
   },
   {
@@ -36,6 +36,16 @@ export const palettes: IPalette[] = [
       primary: '#f7e2d2',
       secondary: '#ad7c53',
       accents: ['#dec1a9', '#4f6b60', '#bf6043'],
+    },
+  },
+  {
+    name: 'beloved witch',
+    colors: {
+      background: '#fff9f5',
+      primary: '#693651',
+      secondary: '#283323',
+      tertiary: '#e89a3a',
+      accents: ['#69670f', '#ccc1d4', '#f7e1c8'],
     },
   },
   {
@@ -68,16 +78,7 @@ export const palettes: IPalette[] = [
       accents: ['#e0c6ad'],
     },
   },
-  {
-    name: 'beloved witch',
-    colors: {
-      background: '#fff9f5',
-      primary: '#693651',
-      secondary: '#283323',
-      tertiary: '#e89a3a',
-      accents: ['#69670f', '#ccc1d4', '#f7e1c8'],
-    },
-  },
+
   {
     name: 'winter sweater',
     colors: {
@@ -103,6 +104,15 @@ export const palettes: IPalette[] = [
       background: '#fffdf5',
       primary: '#4d303f',
       accents: ['#fff1e3', '#faafb0'],
+    },
+  },
+  {
+    name: 'fresh and simple',
+    colors: {
+      background: '#1a2e36',
+      primary: '#f5e3ce',
+      secondary: '#edece8',
+      accents: ['#77848c'],
     },
   },
   {
@@ -161,6 +171,16 @@ export const palettes: IPalette[] = [
     },
   },
   {
+    name: 'espresso revisited',
+    colors: {
+      background: '#dbd1b8',
+      primary: '#755244',
+      secondary: '#aba585',
+      tertiary: '#475559',
+      accents: ['#a16743'],
+    },
+  },
+  {
     name: 'bread loaf',
     colors: {
       background: '#c2831d',
@@ -169,16 +189,7 @@ export const palettes: IPalette[] = [
       accents: ['#e0cab6', '#823c19', '#bfa147'],
     },
   },
-  {
-    name: 'voyage voyage',
-    colors: {
-      background: '#4e9299',
-      primary: '#f0e5d8',
-      secondary: '#2c415e',
-      tertiary: '#dbcf27',
-      accents: ['#2e415c', '#7674ab', '#ebb95e'],
-    },
-  },
+
   {
     name: 'lost in translation',
     colors: {
@@ -195,6 +206,133 @@ export const palettes: IPalette[] = [
       secondary: '#ede2d8',
       tertiary: '#cf8365',
       accents: ['#d67233'],
+    },
+  },
+  {
+    name: 'fig tree',
+    colors: {
+      background: '#5b213a',
+      primary: '#f2d8c9',
+      secondary: '#4a4100',
+      accents: ['#94403e, #a18300'],
+    },
+  },
+  {
+    name: 'good news',
+    colors: {
+      background: '#434531',
+      primary: '#ffefcf',
+      secondary: '#e09231',
+      tertiary: '#a68e74',
+      accents: ['#d18a38', '#53543f', '#b09880'],
+    },
+  },
+  {
+    name: 'silent night',
+    colors: {
+      background: '#62709e',
+      primary: '#f0f8ff',
+      secondary: '#781d1c',
+      tertiary: '#7d7d65',
+      accents: ['#30271d', '#73514b'],
+    },
+  },
+  {
+    name: 'sea breeze',
+    colors: {
+      background: '#8eab97',
+      primary: '#0a0f0b',
+      accents: ['#2b6d70', '#8c8153', '#dec1ab'],
+    },
+  },
+  {
+    name: 'apricot jam',
+    colors: {
+      background: '#fabb7f',
+      primary: '#577c82',
+      secondary: '#cc712b',
+      tertiary: '#a7ba93',
+      accents: ['#b1d8de', '#fcdbc0'],
+    },
+  },
+  {
+    name: 'practical magic',
+    colors: {
+      background: '#80337d',
+      primary: '#fcffff',
+      accents: ['#cf4ea4', '#c76997', '#e37182'],
+    },
+  },
+  {
+    name: 'lemonade stand',
+    colors: {
+      background: '#5966b1',
+      primary: '#f6a230',
+      secondary: '#fbcf41',
+      tertiary: '#fffffd',
+    },
+  },
+  {
+    name: 'pistachio and mint',
+    colors: {
+      background: '#c3c98d',
+      primary: '#322640',
+      accents: ['#618770', '#80bab3', '#93c7b4'],
+    },
+  },
+  {
+    name: 'voyage voyage',
+    colors: {
+      background: '#4e9299',
+      primary: '#f0e5d8',
+      secondary: '#2c415e',
+      tertiary: '#dbcf27',
+      accents: ['#2e415c', '#7674ab', '#ebb95e'],
+    },
+  },
+  {
+    name: 'from the attic',
+    colors: {
+      background: '#452316',
+      primary: '#c9b161',
+      secondary: '#f7edd7',
+      tertiary: '#d1c3bc',
+      accents: ['#783719', '#fadea2', '#b88454'],
+    },
+  },
+  {
+    name: 'lavender hills',
+    colors: {
+      background: '#a3869a',
+      primary: '#2e1a29',
+      secondary: '#f78068',
+      accents: ['#de3931', '#f7b39c', '#5e0a0a'],
+    },
+  },
+  {
+    name: 'laufey at the holywood bowl',
+    colors: {
+      background: '#0d0d0d',
+      primary: '#cc6e89',
+      secondary: '#ffffff',
+      accents: ['#080121', '#a33e08', '#2e0a11'],
+    },
+  },
+  {
+    name: 'vintage paper',
+    colors: {
+      background: '#F2D7A2',
+      primary: '#3D3628',
+      accents: ['#845831', '#F0A605'],
+    },
+  },
+  {
+    name: 'stem heroine',
+    colors: {
+      background: '#dbcece',
+      primary: '#614156',
+      secondary: '#342c36',
+      tertiary: '##a89fb3',
     },
   },
 ]
