@@ -8,9 +8,12 @@ const Card = ({ name, colors, visible }: ICard) => {
     alert(`Copied ${value} to clipboard`)
   }
 
+  const hasThreeColors = !!colors.tertiary
+  const hasTwoColors = !!colors.secondary && !colors.tertiary
+
   return (
     <div
-      className={`${styles.card} ${visible ? styles.cardVisible : ''}`}
+      className={`${styles.card} ${visible && styles.cardVisible}`}
       style={{
         backgroundColor: colors.background,
         border: `1px solid ${colors.primary}`,
@@ -35,7 +38,10 @@ const Card = ({ name, colors, visible }: ICard) => {
         <div className={styles.colorBox}>
           <div
             className={styles.primaryBox}
-            style={{ backgroundColor: colors.primary }}
+            style={{
+              backgroundColor: colors.primary,
+              width: hasThreeColors ? '150px' : hasTwoColors ? '190px' : '350px',
+            }}
             onClick={() => copyToClipboard(colors.background)}
           />
         </div>
@@ -44,7 +50,10 @@ const Card = ({ name, colors, visible }: ICard) => {
           <div className={styles.colorBox}>
             <div
               className={styles.secondaryBox}
-              style={{ backgroundColor: colors.secondary }}
+              style={{
+                backgroundColor: colors.secondary,
+                width: hasThreeColors ? '120px' : '160px',
+              }}
               onClick={() => copyToClipboard(colors.background)}
             />
           </div>
