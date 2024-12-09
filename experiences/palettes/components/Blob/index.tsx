@@ -1,6 +1,6 @@
+import cx from 'classnames'
 import React from 'react'
 import styles from '../../styles/Palette.module.scss'
-import cx from 'classnames'
 
 interface IAnimation {
   duration: string
@@ -43,14 +43,16 @@ const getDuration = (day: number) => {
   return `${time}ms`
 }
 
-const BlobMarker = ({
+const Blob = ({
   name,
   color,
+  accent = false,
   type,
 }: {
   name: string
   color: string
-  type: 'primary' | 'secondary' | 'tertiary'
+  accent?: boolean
+  type: 'primary' | 'secondary' | 'tertiary' | `accent-${number}`
 }) => {
   const duration = getDuration(7)
 
@@ -68,7 +70,7 @@ const BlobMarker = ({
       viewBox="0 0 600 600"
       id={'blobSvg'}
       style={{ opacity: 1 }}
-      className={cx(styles.blob, styles[type])}
+      className={cx(styles.blob, accent && styles.accent, styles[type])}
     >
       <defs>
         <Gradient id={'gradient-' + name} color1={palette.color1} color2={palette.color2} />
@@ -80,4 +82,4 @@ const BlobMarker = ({
   )
 }
 
-export default BlobMarker
+export default Blob

@@ -1,8 +1,27 @@
-.square {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  overflow: hidden;
+//----------------------------------------------
+// GRID
+//----------------------------------------------
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 48px;
+  font-size: 2.5rem;
+}
+
+//----------------------------------------------
+// PALETTE
+//----------------------------------------------
+
+.subtitle {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 48px;
+  font-size: 1.25rem;
 }
 
 .palettesContainer {
@@ -14,41 +33,118 @@
   margin: 0 auto;
 }
 
+.square {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+//----------------------------------------------
+// COLOR CARD
+//----------------------------------------------
+
+.card {
+  position: absolute;
+  height: 250px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  padding: 15px;
+  box-shadow: 12px 8px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cardVisible {
+  opacity: 1;
+}
+
+.colorRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.backgroundBox,
+.colorBox {
+  cursor: pointer;
+}
+
+.backgroundBox {
+  width: 370px;
+  height: 60px;
+}
+
+.primaryBox {
+  width: 150px;
+  height: 40px;
+}
+
+.secondaryBox {
+  width: 120px;
+  height: 40px;
+}
+
+.tertiaryBox {
+  width: 80px;
+  height: 40px;
+}
+
+.accentBox {
+  width: 60px;
+  height: 20px;
+}
+
+.colorLabel {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+//----------------------------------------------
+// BLOB
+//----------------------------------------------
+
 .blob {
   position: absolute;
 }
 
 .primary {
-  height: 100%;
+  height: 150%;
+  margin-left: 35%;
 }
 
 .secondary {
-  height: 90px;
+  margin-top: -5%;
+  height: 65%;
+  margin-left: 5%;
 }
 
 .tertiary {
-  height: 60px;
+  height: 45%;
+  margin-top: 47%;
+  margin-left: 5%;
 }
 
-// TODO keep this for minimalist view
-// .square {
-//   width: 400px;
-//   height: 400px;
-//   position: relative;
-//   overflow: hidden;
-// }
+.accent {
+  height: 20%;
+}
 
-// .palettesContainer {
-//   display: grid;
-//   grid-template-columns: repeat(3, 1fr);
-//   gap: 16px;
-//   place-items: center;
-//   max-width: 1232px;
-//   margin: 0 auto;
-// }
+.accent-0 {
+  margin-left: 3%;
+  margin-top: 37%;
+}
 
-// .blob {
-//   position: absolute;
-//   z-index: 0;
-//   height: 100%;
-// }
+.accent-2 {
+  margin-left: 52%;
+  margin-top: 2%;
+}
+
+.accent-1 {
+  margin-top: 77%;
+  margin-left: 30%;
+}
