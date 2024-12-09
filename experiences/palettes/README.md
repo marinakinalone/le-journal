@@ -1,10 +1,10 @@
-# [Game Name]
+# [Palettes]
 
-A brief description of the game.
+A selection of color palettes.
 
 ## Table of Contents
 
-- [\[Game Name\]](#game-name)
+- [\[Palettes\]](#palettes)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Built with](#built-with)
@@ -12,11 +12,11 @@ A brief description of the game.
 
 ## Description
 
-Provide a detailed description of the game, its purpose, and any unique characteristics that make it stand out in your project.
+A personal color library, curated from my explorations across the web. Each palette has a built-in card with the possibility to copy the color hues for personal use.
 
 ## Built with
 
-- List the technologies and frameworks used for this specific game.
+- NextJS
 
 ## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 
