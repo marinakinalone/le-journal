@@ -310,7 +310,7 @@ export const palettes: IPalette[] = [
     },
   },
   {
-    name: 'laufey at the holywood bowl',
+    name: 'laufey @hollywood bowl',
     colors: {
       background: '#0d0d0d',
       primary: '#cc6e89',
