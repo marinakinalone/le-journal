@@ -73,13 +73,12 @@
   margin-top: 16px;
 }
 
-.backgroundBox,
 .colorBox {
   cursor: pointer;
+  position: relative;
 }
 
 .backgroundBox {
-  width: 370px;
   height: 60px;
 }
 
@@ -92,12 +91,10 @@
 }
 
 .tertiaryBox {
-  width: 80px;
-  height: 40px;
+  width: 840px;
 }
 
 .accentBox {
-  width: 90px;
   height: 20px;
 }
 
@@ -106,6 +103,34 @@
   font-family: $font-palettes;
   margin-bottom: 0;
   margin-top: 0;
+}
+
+.tooltip {
+  font-family: $font-palettes;
+  position: absolute;
+  margin-top: -35px;
+  background-color: $white;
+  width: 90px;
+  height: 35px;
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% calc(100% - 10px),
+    calc(50% + 10px) calc(100% - 10px),
+    50% 100%,
+    calc(50% - 10px) calc(100% - 10px),
+    0% calc(100% - 10px)
+  );
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tooltipVisible {
+  opacity: 1;
 }
 
 //----------------------------------------------

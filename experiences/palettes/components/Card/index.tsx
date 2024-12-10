@@ -1,15 +1,21 @@
 import React from 'react'
-import { ICard } from '../../constants'
+import { COLOR_TYPE, ICard } from '../../constants'
 import styles from '../../styles/Palette.module.scss'
+import ColorBox from './ColorBox'
+
+const { BACKGROUND, PRIMARY, SECONDARY, TERTIARY, ACCENT } = COLOR_TYPE
 
 const Card = ({ name, colors, visible }: ICard) => {
-  const copyToClipboard = (value: string) => {
-    navigator.clipboard.writeText(value)
-    alert(`Copied ${value} to clipboard`)
-  }
-
   const hasThreeColors = !!colors.tertiary
   const hasTwoColors = !!colors.secondary && !colors.tertiary
+
+  const colorSwatchWidth = {
+    background: 350,
+    primary: hasThreeColors ? 150 : hasTwoColors ? 190 : 350,
+    secondary: hasThreeColors ? 120 : 160,
+    tertiary: 80,
+    accent: 90,
+  }
 
   return (
     <div
@@ -24,61 +30,42 @@ const Card = ({ name, colors, visible }: ICard) => {
       </h3>
 
       <div className={styles.colorRow}>
-        <div
-          className={styles.backgroundBox}
-          style={{
-            backgroundColor: colors.background,
-            border: `1px solid ${colors.primary}`,
-          }}
-          onClick={() => copyToClipboard(colors.background)}
+        <ColorBox
+          color={colors.background}
+          width={colorSwatchWidth.background}
+          colorType={BACKGROUND}
+          boxBorderColor={colors.primary}
         />
       </div>
 
       <div className={styles.colorRow}>
-        <div className={styles.colorBox}>
-          <div
-            className={styles.primaryBox}
-            style={{
-              backgroundColor: colors.primary,
-              width: hasThreeColors ? '150px' : hasTwoColors ? '190px' : '350px',
-            }}
-            onClick={() => copyToClipboard(colors.background)}
-          />
-        </div>
+        <ColorBox color={colors.primary} width={colorSwatchWidth.primary} colorType={PRIMARY} />
 
         {colors.secondary && (
-          <div className={styles.colorBox}>
-            <div
-              className={styles.secondaryBox}
-              style={{
-                backgroundColor: colors.secondary,
-                width: hasThreeColors ? '120px' : '160px',
-              }}
-              onClick={() => copyToClipboard(colors.background)}
-            />
-          </div>
+          <ColorBox
+            color={colors.secondary}
+            width={colorSwatchWidth.secondary}
+            colorType={SECONDARY}
+          />
         )}
 
         {colors.tertiary && (
-          <div className={styles.colorBox}>
-            <div
-              className={styles.tertiaryBox}
-              style={{ backgroundColor: colors.tertiary }}
-              onClick={() => copyToClipboard(colors.background)}
-            />
-          </div>
+          <ColorBox
+            color={colors.tertiary}
+            width={colorSwatchWidth.tertiary}
+            colorType={TERTIARY}
+          />
         )}
       </div>
 
       <div className={styles.colorRow}>
         {colors.accents?.map((accentColor) => (
-          <div key={accentColor} className={styles.colorBox}>
-            <div
-              className={styles.accentBox}
-              style={{ backgroundColor: accentColor }}
-              onClick={() => copyToClipboard(colors.background)}
-            />
-          </div>
+          <ColorBox
+            key={accentColor}
+            color={accentColor}
+            width={colorSwatchWidth.accent}
+            colorType={ACCENT}
+          />
         ))}
       </div>
     </div>
