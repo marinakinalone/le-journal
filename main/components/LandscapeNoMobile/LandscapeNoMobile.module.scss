@@ -1,0 +1,101 @@
+@use 'styles/animations' as *;
+@use 'styles/mixins' as *;
+@use 'styles/variables' as *;
+
+.container {
+  position: absolute;
+  top: 10%;
+  height: 80%;
+  @include border-simple;
+  background-color: $white;
+  padding: 1.5rem;
+  margin-right: 10%;
+  @include flex-center-column;
+  p {
+    text-align: center;
+  }
+}
+
+.frame {
+  width: 7rem;
+  height: 7rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.frame img {
+  position: absolute;
+}
+
+$fadeInProps: (
+  name: fadeIn,
+  duration: 0.2s,
+  opacity: 0,
+);
+
+$fadeInInitialDelay: 1.5s;
+
+$slideLeftProps: (
+  name: slideLeftReturn,
+  duration: 0.9s,
+);
+
+$slideRightProps: (
+  name: slideRightReturn,
+  duration: 0.9s,
+);
+
+@for $i from 0 to 6 {
+  $delay: 0.15s * $i;
+
+  @if $i % 2 == 0 {
+    $slideRightClassName: unquote('.landscape_#{$i}');
+    #{$slideRightClassName} {
+      @include animation-properties(
+        map-get($slideRightProps, name),
+        $delay,
+        map-get($slideRightProps, duration)
+      );
+    }
+  } @else {
+    $slideLeftClassName: unquote('.landscape_#{$i}');
+    #{$slideLeftClassName} {
+      @include animation-properties(
+        map-get($slideLeftProps, name),
+        $delay,
+        map-get($slideLeftProps, duration)
+      );
+    }
+  }
+}
+
+.landscape_6 {
+  animation-delay: 1.15s;
+  animation-duration: 0.2s;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
+  opacity: 0;
+}
+
+@for $i from 7 to 17 {
+  $delay: $fadeInInitialDelay;
+  $fadeInInitialDelay: $delay + 0.12s;
+
+  $fadeInClassName: unquote('.landscape_#{$i}');
+  #{$fadeInClassName} {
+    @include animation-properties(
+      map-get($fadeInProps, name),
+      $delay,
+      map-get($fadeInProps, duration),
+      both,
+      map-get($fadeInProps, opacity)
+    );
+  }
+}
+
+.landscape_17 {
+  animation-delay: 2.8s;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: swashIn;
+}
