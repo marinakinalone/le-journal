@@ -8,7 +8,7 @@ export const experiencesData: IexperienceBasicData[] = [
     },
   },
   {
-    hidden: true,
+    new: true,
     title: 'palettes',
     metadata: {
       description: 'TBD', // TODO Add description

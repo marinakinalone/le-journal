@@ -1,0 +1,178 @@
+@use 'styles/variables' as *;
+//----------------------------------------------
+// GRID
+//----------------------------------------------
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 48px;
+  font-size: 4rem;
+  font-family: $font-palettes;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 48px;
+  font-size: 1.25rem;
+}
+
+//----------------------------------------------
+// PALETTE
+//----------------------------------------------
+
+.palettesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  place-items: center;
+  max-width: 1232px;
+  margin: 0 auto;
+}
+
+.square {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+//----------------------------------------------
+// COLOR CARD
+//----------------------------------------------
+
+.card {
+  position: absolute;
+  height: 250px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  padding: 15px;
+  box-shadow: 12px 8px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cardVisible {
+  opacity: 1;
+}
+
+.colorRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.colorBox {
+  cursor: pointer;
+  position: relative;
+}
+
+.backgroundBox {
+  height: 60px;
+}
+
+.primaryBox {
+  height: 40px;
+}
+
+.secondaryBox {
+  height: 40px;
+}
+
+.tertiaryBox {
+  width: 840px;
+}
+
+.accentBox {
+  height: 20px;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-family: $font-palettes;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.tooltip {
+  font-family: $font-palettes;
+  position: absolute;
+  margin-top: -35px;
+  background-color: $white;
+  width: 90px;
+  height: 35px;
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% calc(100% - 10px),
+    calc(50% + 10px) calc(100% - 10px),
+    50% 100%,
+    calc(50% - 10px) calc(100% - 10px),
+    0% calc(100% - 10px)
+  );
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tooltipVisible {
+  opacity: 1;
+}
+
+//----------------------------------------------
+// BLOB
+//----------------------------------------------
+
+.blob {
+  position: absolute;
+}
+
+.primary {
+  height: 150%;
+  margin-left: 35%;
+}
+
+.secondary {
+  margin-top: -5%;
+  height: 65%;
+  margin-left: 5%;
+}
+
+.tertiary {
+  height: 45%;
+  margin-top: 47%;
+  margin-left: 5%;
+}
+
+.accent {
+  height: 20%;
+}
+
+.accent-0 {
+  margin-left: 3%;
+  margin-top: 37%;
+}
+
+.accent-2 {
+  margin-left: 52%;
+  margin-top: 2%;
+}
+
+.accent-1 {
+  margin-top: 77%;
+  margin-left: 30%;
+}
