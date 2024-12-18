@@ -14,7 +14,15 @@ const { HOME, NOT_SUPPORTED } = PATH
 
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
-const NavigationProvider = ({ children }: { children: ReactNode }) => {
+const NavigationProvider = ({
+  isPortraitFormatAccepted = true,
+  shouldSupportAllFormats = true,
+  children,
+}: {
+  isPortraitFormatAccepted?: boolean
+  shouldSupportAllFormats?: boolean
+  children: ReactNode
+}) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
   // const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
   const [savedPath, setSavedPath] = useState('')
@@ -63,20 +71,35 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   useEffect(() => {
-    if (!isLandscape || !isSupportedDevice) {
-      if (router.pathname !== NOT_SUPPORTED) {
-        setSavedPath(router.asPath)
-        router.push(NOT_SUPPORTED)
-      }
-    } else if (router.pathname === NOT_SUPPORTED) {
-      if (savedPath && savedPath !== NOT_SUPPORTED) {
-        router.push(savedPath)
-      } else {
-        redirectToHome()
+    const handleOrientationChange = (event: MediaQueryListEvent) => {
+      setIsLandscape(event.matches)
+    }
+
+    const mediaQueryList = window.matchMedia('(orientation: landscape)')
+    mediaQueryList.addEventListener('change', handleOrientationChange)
+
+    return () => {
+      mediaQueryList.removeEventListener('change', handleOrientationChange)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!shouldSupportAllFormats) {
+      if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
+        if (router.pathname !== NOT_SUPPORTED) {
+          setSavedPath(router.asPath)
+          router.push(NOT_SUPPORTED)
+        }
+      } else if (router.pathname === NOT_SUPPORTED) {
+        if (savedPath && savedPath !== NOT_SUPPORTED) {
+          router.push(savedPath)
+        } else {
+          redirectToHome()
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLandscape])
+  }, [isLandscape, isSupportedDevice])
 
   return (
     <NavigationContext.Provider value={{ redirectToHome }}>{children}</NavigationContext.Provider>
