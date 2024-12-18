@@ -1,6 +1,6 @@
 # [Jardinage Graphique]
 
-// TODO
+A zen garden, digital and colorful.
 
 ## Table of Contents
 
@@ -12,7 +12,9 @@
 
 ## Description
 
-// TODO
+Draw with flowers in this little zen garden. Flowers of random shapes appear as we hover over the playground. Want to start over? Click on the rake.
+
+All assets are from https://unsplash.com/@wyxina
 
 ## Built with
 
