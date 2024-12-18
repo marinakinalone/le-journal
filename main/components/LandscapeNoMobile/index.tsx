@@ -9,7 +9,6 @@ const STRINGS = {
   cta: 'Passez en mode paysage...',
 }
 
-//todo : add animation to switch device orientation + paysage :)
 const LandscapeNoMobile = () => {
   return (
     <article className={mainStyles.container}>
