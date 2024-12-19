@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, { createContext, ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { PATH } from '../../constants'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
+import { redirect } from 'next/dist/server/api-utils'
 
 // TODO move to its own file
 export const experienceConfig = {
@@ -36,9 +37,12 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
   // const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
   const [savedPath, setSavedPath] = useState('')
   const [currentExperience, setCurrentExperience] = useState('')
-  const navigationConfig =
-    experienceConfig[currentExperience as keyof typeof experienceConfig] || {}
-  const { isPortraitFormatAccepted, shouldSupportAllFormats } = navigationConfig
+  const [navigationConfig, setNavigationConfig] = useState<
+    Partial<{
+      isPortraitFormatAccepted: boolean
+      shouldSupportAllFormats: boolean
+    }>
+  >({})
 
   const isSupportedDevice = !isMobileDevice()
 
@@ -50,8 +54,22 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  const redirectToNotSupported = () => {
+    if (router.pathname !== NOT_SUPPORTED) {
+      setSavedPath(router.asPath)
+      router.push(NOT_SUPPORTED)
+    }
+  }
+
+  const handleNavigation = () => {
+    if (savedPath && savedPath !== NOT_SUPPORTED) {
+      router.push(savedPath)
+    } else {
+      redirectToHome()
+    }
+  }
+
   useEffect(() => {
-    console.log('router.asPat: ', router.asPath)
     if (router.asPath !== NOT_SUPPORTED) {
       setSavedPath(router.asPath)
     }
@@ -85,7 +103,6 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const handleOrientationChange = (event: MediaQueryListEvent) => {
-      console.log('orientation change: ', event.matches)
       setIsLandscape(event.matches)
     }
 
@@ -98,33 +115,34 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   useEffect(() => {
-    if (!shouldSupportAllFormats) {
-      if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
-        if (router.pathname !== NOT_SUPPORTED) {
-          setSavedPath(router.asPath)
-          router.push(NOT_SUPPORTED)
+    if (currentExperience) {
+      const config = experienceConfig[currentExperience as keyof typeof experienceConfig] || {}
+      setNavigationConfig(config)
+    }
+  }, [currentExperience])
+
+  useEffect(() => {
+    if (
+      currentExperience &&
+      navigationConfig.isPortraitFormatAccepted !== undefined &&
+      navigationConfig.shouldSupportAllFormats !== undefined
+    ) {
+      const { isPortraitFormatAccepted, shouldSupportAllFormats } = navigationConfig
+
+      if (!shouldSupportAllFormats) {
+        if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
+          redirectToNotSupported()
+        } else if (router.pathname === NOT_SUPPORTED) {
+          handleNavigation()
         }
+      } else if (!isLandscape && !isPortraitFormatAccepted) {
+        redirectToNotSupported()
       } else if (router.pathname === NOT_SUPPORTED) {
-        if (savedPath && savedPath !== NOT_SUPPORTED) {
-          router.push(savedPath)
-        } else {
-          redirectToHome()
-        }
-      }
-    } else if (!isLandscape && !isPortraitFormatAccepted) {
-      if (router.pathname !== NOT_SUPPORTED) {
-        setSavedPath(router.asPath)
-        router.push(NOT_SUPPORTED)
-      }
-    } else if (router.pathname === NOT_SUPPORTED) {
-      if (savedPath && savedPath !== NOT_SUPPORTED) {
-        router.push(savedPath)
-      } else {
-        redirectToHome()
+        handleNavigation()
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLandscape, isSupportedDevice])
+  }, [isLandscape, isSupportedDevice, navigationConfig, currentExperience])
 
   return (
     <NavigationContext.Provider value={{ redirectToHome, setCurrentExperience }}>
