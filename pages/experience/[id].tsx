@@ -1,33 +1,21 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Loader from '../../main/components/Loader'
-import NavigationProvider from '../../main/providers/Navigation'
-
-export const experienceConfig = {
-  palettes: {
-    isPortraitFormatAccepted: true,
-    shouldSupportAllFormats: true,
-  },
-}
+import useNavigation from '../../main/hooks/useNavigation'
 
 const ExperiencePage = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const config = experienceConfig[id as keyof typeof experienceConfig] || {}
+  const { setCurrentExperience } = useNavigation()
+
+  setCurrentExperience(id as string)
 
   const ExperienceComponent = dynamic(() => import(`../../experiences/${id}/index.tsx`), {
     loading: () => <Loader />,
     ssr: false,
   })
-  return (
-    <NavigationProvider
-      isPortraitFormatAccepted={config.isPortraitFormatAccepted}
-      shouldSupportAllFormats={config.shouldSupportAllFormats}
-    >
-      <ExperienceComponent />
-    </NavigationProvider>
-  )
+  return <ExperienceComponent />
 }
 
 export default ExperiencePage
