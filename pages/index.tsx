@@ -1,10 +1,14 @@
 import type { NextPage } from 'next'
+import { useEffect } from 'react'
 import Home from '../main/components/Home'
 import useNavigation from '../main/hooks/useNavigation'
 
 const App: NextPage = () => {
   const { setCurrentExperience } = useNavigation()
-  setCurrentExperience('home')
+
+  useEffect(() => {
+    setCurrentExperience('home')
+  }, [])
 
   return <Home />
 }

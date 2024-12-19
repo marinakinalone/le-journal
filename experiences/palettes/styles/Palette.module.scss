@@ -34,12 +34,15 @@
   place-items: center;
   max-width: 1232px;
   margin: 0 auto;
+
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
+    padding: 1rem;
   }
 }
 

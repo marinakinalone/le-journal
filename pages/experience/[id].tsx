@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Loader from '../../main/components/Loader'
 import useNavigation from '../../main/hooks/useNavigation'
 
@@ -9,7 +10,9 @@ const ExperiencePage = () => {
 
   const { setCurrentExperience } = useNavigation()
 
-  setCurrentExperience(id as string)
+  useEffect(() => {
+    setCurrentExperience(id as string)
+  }, [id])
 
   const ExperienceComponent = dynamic(() => import(`../../experiences/${id}/index.tsx`), {
     loading: () => <Loader />,
