@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styles from './styles/JardinageGraphique.module.scss'
@@ -23,8 +24,19 @@ const JardinageGraphique = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <h1 className={styles.title}>Jardinage Graphique</h1>
-      <p>reset</p>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Jardinage Graphique</h1>
+        <button
+          className={styles.resetButton}
+          onClick={() => setHoveredDots(Array(totalDots).fill(null))}
+        >
+          <img
+            className={styles.buttonImage}
+            src="/resources/jardinage-graphique/rake.png"
+            alt="Reset"
+          />
+        </button>
+      </div>
       <section className={styles.gardenContainer}>
         <Image
           src="/resources/jardinage-graphique/background.jpg"
@@ -52,7 +64,6 @@ const JardinageGraphique = () => {
 export default JardinageGraphique
 
 // TODO
-// - Add a reset button (a rake!!)
 // - Add a right click
 // - Add dots
 // - Adjust margins
