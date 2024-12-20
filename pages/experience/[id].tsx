@@ -1,33 +1,25 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Loader from '../../main/components/Loader'
-import NavigationProvider from '../../main/providers/Navigation'
-
-export const experienceConfig = {
-  palettes: {
-    isPortraitFormatAccepted: true,
-    shouldSupportAllFormats: true,
-  },
-}
+import useNavigation from '../../main/hooks/useNavigation'
 
 const ExperiencePage = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const config = experienceConfig[id as keyof typeof experienceConfig] || {}
+  const { setCurrentExperience } = useNavigation()
+
+  useEffect(() => {
+    setCurrentExperience(id as string)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
 
   const ExperienceComponent = dynamic(() => import(`../../experiences/${id}/index.tsx`), {
     loading: () => <Loader />,
     ssr: false,
   })
-  return (
-    <NavigationProvider
-      isPortraitFormatAccepted={config.isPortraitFormatAccepted}
-      shouldSupportAllFormats={config.shouldSupportAllFormats}
-    >
-      <ExperienceComponent />
-    </NavigationProvider>
-  )
+  return <ExperienceComponent />
 }
 
 export default ExperiencePage
