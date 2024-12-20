@@ -1,24 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { PATH } from '../../constants'
-import { experiencesData } from '../../data/experiences'
+import { experiences } from '../../data'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
-
-// TODO move to its own file
-// export const experienceConfig = {
-//   home: {
-//     isPortraitFormatAccepted: true,
-//     shouldSupportAllFormats: true,
-//   },
-//   palettes: {
-//     isPortraitFormatAccepted: true,
-//     shouldSupportAllFormats: true,
-//   },
-//   'jardinage-graphique': {
-//     isPortraitFormatAccepted: false,
-//     shouldSupportAllFormats: false,
-//   },
-// }
 
 export interface INavigationContext {
   //  displayIntroModal: boolean
@@ -116,8 +100,8 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (currentExperience) {
-      const experience = experiencesData.find((exp) => exp.id === currentExperience)
-      console.log('experience: ', experience)
+      const experience = experiences.find((exp) => exp.id === currentExperience)
+
       if (experience && experience.config) {
         setNavigationConfig(experience.config)
       }

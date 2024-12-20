@@ -1,31 +1,30 @@
-export interface IexperienceMusic {
+export interface IExperienceMusic {
   artist: string
   song: string
   source: string
 }
 
-export interface IexperienceMetadata {
+export interface IExperienceMetadata {
   description: string
 }
-export interface IexperienceBasicData {
+export interface IExperienceBasicData {
   hidden?: true
   new?: true
   title: string
-  id: string
-  music?: IexperienceMusic
-  metadata: IexperienceMetadata
+  music?: IExperienceMusic
+  metadata: IExperienceMetadata
   config: {
     isPortraitFormatAccepted: boolean
     shouldSupportAllFormats: boolean
   }
 }
 
-export interface IexperienceFavicons {
+export interface IExperienceFavicons {
   favicon16: string
   favicon32: string
   appleTouchIcon: string
 }
-export interface IexperienceInfo extends IexperienceBasicData {
+export interface IExperienceInfo extends IExperienceBasicData {
   id: string
-  favicons: IexperienceFavicons
+  favicons: IExperienceFavicons
 }

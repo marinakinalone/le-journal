@@ -1,12 +1,11 @@
-import { IexperienceBasicData } from './experiencesTypes'
+import { IExperienceBasicData } from './experiencesTypes'
 
-export const experiencesData: IexperienceBasicData[] = [
+export const experiencesData: IExperienceBasicData[] = [
   {
     hidden: true,
-    title: 'home',
-    id: 'home',
+    title: 'le-journal',
     metadata: {
-      description: 'info for the home page.',
+      description: 'un journal intime, un espace pour écrire, dessiner, ou simplement se détendre.',
     },
     config: {
       isPortraitFormatAccepted: true,
@@ -15,7 +14,6 @@ export const experiencesData: IexperienceBasicData[] = [
   },
   {
     title: 'jardinage graphique',
-    id: 'jardinage-graphique',
     metadata: {
       description:
         'Draw with flowers in this little zen garden. Flowers of random shapes appear as we hover over the playground. Want to start over? Click on the rake.',
@@ -27,7 +25,6 @@ export const experiencesData: IexperienceBasicData[] = [
   },
   {
     title: 'palettes',
-    id: 'palettes',
     metadata: {
       description:
         'A personal color library, curated from my explorations across the web. Each palette has a built-in card with the possibility to copy the color hues for personal use.',
@@ -41,7 +38,6 @@ export const experiencesData: IexperienceBasicData[] = [
     new: true,
     hidden: true,
     title: 'une minute',
-    id: 'une-minute',
     metadata: {
       description: 'TBD', // TODO Add description
     },
@@ -54,7 +50,6 @@ export const experiencesData: IexperienceBasicData[] = [
     new: true,
     hidden: true,
     title: 'fenêtres',
-    id: 'fenetres',
     metadata: {
       description: 'TBD', // TODO Add description
     },
@@ -67,7 +62,6 @@ export const experiencesData: IexperienceBasicData[] = [
     new: true,
     hidden: true,
     title: 'digital quilts',
-    id: 'digital-quilts',
     metadata: {
       description: 'TBD', // TODO Add description
     },

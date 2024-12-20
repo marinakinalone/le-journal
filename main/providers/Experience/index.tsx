@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import React, { createContext, ReactNode, useState } from 'react'
-import { IexperienceInfo } from '../../data/experiencesTypes'
-import { homePageData as initialExperienceContext } from '../../data/homePageData'
+import { experiences } from '../../data'
+import { IExperienceInfo } from '../../data/experiencesTypes'
 
-interface IExperienceContext extends IexperienceInfo {
-  updateExperienceContext: (newContext: IexperienceInfo) => void
+interface IExperienceContext extends IExperienceInfo {
+  updateExperienceContext: (newContext: IExperienceInfo) => void
   children?: ReactNode
 }
+
+const initialExperienceContext = experiences[0] as IExperienceContext
 
 export const ExperienceContext = createContext<IExperienceContext>({
   ...initialExperienceContext,
