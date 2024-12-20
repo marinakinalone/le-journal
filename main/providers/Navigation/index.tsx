@@ -1,12 +1,30 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, { createContext, ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { PATH } from '../../constants'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
+import { redirect } from 'next/dist/server/api-utils'
+
+// TODO move to its own file
+export const experienceConfig = {
+  home: {
+    isPortraitFormatAccepted: true,
+    shouldSupportAllFormats: true,
+  },
+  palettes: {
+    isPortraitFormatAccepted: true,
+    shouldSupportAllFormats: true,
+  },
+  'jardinage-graphique': {
+    isPortraitFormatAccepted: false,
+    shouldSupportAllFormats: true,
+  },
+}
 
 export interface INavigationContext {
-  //  ddisplayIntroModal: boolean
+  //  displayIntroModal: boolean
   // setDisplayIntroModal?: React.Dispatch<React.SetStateAction<boolean>>
   redirectToHome: () => void
+  setCurrentExperience: React.Dispatch<React.SetStateAction<string>>
   children?: ReactNode
 }
 
@@ -14,18 +32,17 @@ const { HOME, NOT_SUPPORTED } = PATH
 
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
-const NavigationProvider = ({
-  isPortraitFormatAccepted = true,
-  shouldSupportAllFormats = true,
-  children,
-}: {
-  isPortraitFormatAccepted?: boolean
-  shouldSupportAllFormats?: boolean
-  children: ReactNode
-}) => {
+const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
   // const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
   const [savedPath, setSavedPath] = useState('')
+  const [currentExperience, setCurrentExperience] = useState('')
+  const [navigationConfig, setNavigationConfig] = useState<
+    Partial<{
+      isPortraitFormatAccepted: boolean
+      shouldSupportAllFormats: boolean
+    }>
+  >({})
 
   const isSupportedDevice = !isMobileDevice()
 
@@ -34,6 +51,21 @@ const NavigationProvider = ({
   const redirectToHome = () => {
     if (router.pathname !== HOME) {
       router.push(HOME)
+    }
+  }
+
+  const redirectToNotSupported = () => {
+    if (router.pathname !== NOT_SUPPORTED) {
+      setSavedPath(router.asPath)
+      router.push(NOT_SUPPORTED)
+    }
+  }
+
+  const handleNavigation = () => {
+    if (savedPath && savedPath !== NOT_SUPPORTED) {
+      router.push(savedPath)
+    } else {
+      redirectToHome()
     }
   }
 
@@ -62,7 +94,6 @@ const NavigationProvider = ({
     const handleResize = () => {
       setIsLandscape(isLandscapeOrientation())
     }
-
     window.addEventListener('resize', handleResize)
 
     return () => {
@@ -84,25 +115,39 @@ const NavigationProvider = ({
   }, [])
 
   useEffect(() => {
-    if (!shouldSupportAllFormats) {
-      if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
-        if (router.pathname !== NOT_SUPPORTED) {
-          setSavedPath(router.asPath)
-          router.push(NOT_SUPPORTED)
+    if (currentExperience) {
+      const config = experienceConfig[currentExperience as keyof typeof experienceConfig] || {}
+      setNavigationConfig(config)
+    }
+  }, [currentExperience])
+
+  useEffect(() => {
+    if (
+      currentExperience &&
+      navigationConfig.isPortraitFormatAccepted !== undefined &&
+      navigationConfig.shouldSupportAllFormats !== undefined
+    ) {
+      const { isPortraitFormatAccepted, shouldSupportAllFormats } = navigationConfig
+
+      if (!shouldSupportAllFormats) {
+        if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
+          redirectToNotSupported()
+        } else if (router.pathname === NOT_SUPPORTED) {
+          handleNavigation()
         }
+      } else if (!isLandscape && !isPortraitFormatAccepted) {
+        redirectToNotSupported()
       } else if (router.pathname === NOT_SUPPORTED) {
-        if (savedPath && savedPath !== NOT_SUPPORTED) {
-          router.push(savedPath)
-        } else {
-          redirectToHome()
-        }
+        handleNavigation()
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLandscape, isSupportedDevice])
+  }, [isLandscape, isSupportedDevice, navigationConfig, currentExperience])
 
   return (
-    <NavigationContext.Provider value={{ redirectToHome }}>{children}</NavigationContext.Provider>
+    <NavigationContext.Provider value={{ redirectToHome, setCurrentExperience }}>
+      {children}
+    </NavigationContext.Provider>
   )
 }
 
