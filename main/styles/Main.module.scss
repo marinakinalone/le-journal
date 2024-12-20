@@ -1,13 +1,13 @@
 @import '../../styles/fonts', '../../styles/variables';
 
 .container {
-  background-image: url('/resources/home/noise.png');
+  background-image: url('/resources/le-journal/noise.png');
   min-height: 100vh;
 }
 
 .container::after {
   animation: grain 8s steps(10) infinite;
-  background-image: url('/resources/home/paper.png');
+  background-image: url('/resources/le-journal/paper.png');
   content: '';
   height: 300%;
   left: -50%;

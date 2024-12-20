@@ -7,7 +7,7 @@ const App: NextPage = () => {
   const { setCurrentExperience } = useNavigation()
 
   useEffect(() => {
-    setCurrentExperience('home')
+    setCurrentExperience('le-journal')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
