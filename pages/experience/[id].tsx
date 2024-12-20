@@ -12,6 +12,7 @@ const ExperiencePage = () => {
 
   useEffect(() => {
     setCurrentExperience(id as string)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const ExperienceComponent = dynamic(() => import(`../../experiences/${id}/index.tsx`), {
