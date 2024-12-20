@@ -11,8 +11,13 @@ export interface IexperienceBasicData {
   hidden?: true
   new?: true
   title: string
+  id: string
   music?: IexperienceMusic
   metadata: IexperienceMetadata
+  config: {
+    isPortraitFormatAccepted: boolean
+    shouldSupportAllFormats: boolean
+  }
 }
 
 export interface IexperienceFavicons {

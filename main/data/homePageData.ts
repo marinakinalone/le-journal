@@ -1,6 +1,8 @@
 /* 
 This is the initial data we need for the home page (with the list of the experiences.
 */
+
+// TODO move to experiences when dynamic favicons are implemented
 export const homePageData = {
   id: 'le-journal',
   title: 'le journal',

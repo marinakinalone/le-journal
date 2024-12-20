@@ -1,24 +1,24 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useLayoutEffect, useState } from 'react'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import { PATH } from '../../constants'
+import { experiencesData } from '../../data/experiences'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
-import { redirect } from 'next/dist/server/api-utils'
 
 // TODO move to its own file
-export const experienceConfig = {
-  home: {
-    isPortraitFormatAccepted: true,
-    shouldSupportAllFormats: true,
-  },
-  palettes: {
-    isPortraitFormatAccepted: true,
-    shouldSupportAllFormats: true,
-  },
-  'jardinage-graphique': {
-    isPortraitFormatAccepted: false,
-    shouldSupportAllFormats: true,
-  },
-}
+// export const experienceConfig = {
+//   home: {
+//     isPortraitFormatAccepted: true,
+//     shouldSupportAllFormats: true,
+//   },
+//   palettes: {
+//     isPortraitFormatAccepted: true,
+//     shouldSupportAllFormats: true,
+//   },
+//   'jardinage-graphique': {
+//     isPortraitFormatAccepted: false,
+//     shouldSupportAllFormats: false,
+//   },
+// }
 
 export interface INavigationContext {
   //  displayIntroModal: boolean
@@ -116,8 +116,11 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (currentExperience) {
-      const config = experienceConfig[currentExperience as keyof typeof experienceConfig] || {}
-      setNavigationConfig(config)
+      const experience = experiencesData.find((exp) => exp.id === currentExperience)
+      console.log('experience: ', experience)
+      if (experience && experience.config) {
+        setNavigationConfig(experience.config)
+      }
     }
   }, [currentExperience])
 
