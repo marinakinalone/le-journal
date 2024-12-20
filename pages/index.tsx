@@ -8,6 +8,7 @@ const App: NextPage = () => {
 
   useEffect(() => {
     setCurrentExperience('home')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <Home />

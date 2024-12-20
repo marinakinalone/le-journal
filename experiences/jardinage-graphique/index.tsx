@@ -1,15 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './styles/JardinageGraphique.module.scss'
 
 const JardinageGraphique = () => {
-  const rows = 14
-  const columns = 18
+  const [rows, setRows] = useState(14)
+  const [columns, setColumns] = useState(18)
+  const imageRef = useRef<HTMLImageElement>(null)
 
-  const totalDots = rows * columns
-
-  const [hoveredDots, setHoveredDots] = useState(Array(totalDots).fill(null))
+  const [hoveredDots, setHoveredDots] = useState(Array(rows * columns).fill(null))
 
   const handleHover = (index: number) => {
     setHoveredDots((prev) => {
@@ -22,13 +20,24 @@ const JardinageGraphique = () => {
     })
   }
 
+  const updateGridSize = () => {
+    if (imageRef.current) {
+      const { width, height } = imageRef.current.getBoundingClientRect()
+      const newColumns = Math.floor(width / 70)
+      const newRows = Math.floor(height / 70)
+      setColumns(newColumns)
+      setRows(newRows)
+      setHoveredDots(Array(newRows * newColumns).fill(null))
+    }
+  }
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.header}>
         <h1 className={styles.title}>Jardinage Graphique</h1>
         <button
           className={styles.resetButton}
-          onClick={() => setHoveredDots(Array(totalDots).fill(null))}
+          onClick={() => setHoveredDots(Array(rows * columns).fill(null))}
         >
           <img
             className={styles.buttonImage}
@@ -38,14 +47,21 @@ const JardinageGraphique = () => {
         </button>
       </div>
       <section className={styles.gardenContainer}>
-        <Image
+        <img
+          ref={imageRef}
           src="/resources/jardinage-graphique/background.jpg"
           alt="Background"
-          layout="fill"
-          objectFit="cover"
+          className={styles.backgroundImage}
+          onLoad={updateGridSize}
         />
-        <div className={styles.dotGrid}>
-          {Array.from({ length: totalDots }).map((_, index) => (
+        <div
+          className={styles.dotGrid}
+          style={{
+            gridTemplateColumns: `repeat(${columns}, 60px)`,
+            gridTemplateRows: `repeat(${rows}, 60px)`,
+          }}
+        >
+          {Array.from({ length: rows * columns }).map((_, index) => (
             <div key={index} className={styles.dot} onMouseEnter={() => handleHover(index)}>
               {hoveredDots[index] && (
                 <img
@@ -62,8 +78,3 @@ const JardinageGraphique = () => {
 }
 
 export default JardinageGraphique
-
-// TODO
-// - Add a right click
-// - Add dots
-// - Adjust margins
