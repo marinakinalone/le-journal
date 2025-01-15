@@ -36,6 +36,18 @@ export const experiencesData: IExperienceBasicData[] = [
   },
   {
     new: true,
+    title: 'internet is always right',
+    metadata: {
+      description:
+        'A series of debates that we want to settle and who could a better judge than the mighty Internet?',
+    },
+    config: {
+      isPortraitFormatAccepted: true,
+      shouldSupportAllFormats: true,
+    },
+  },
+  {
+    new: true,
     hidden: true,
     title: 'une minute',
     metadata: {

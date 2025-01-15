@@ -1,10 +1,10 @@
-# [Jardinage Graphique]
+# [Internet is always right]
 
-A zen garden, digital and colorful.
+A series of debates that we want to settle and who could a better judge than the mighty Internet?
 
 ## Table of Contents
 
-- [\[Jardinage Graphique\]](#jardinage-graphique)
+- [\[Internet is always right\]](#internet-is-always-right)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Built with](#built-with)
@@ -12,13 +12,12 @@ A zen garden, digital and colorful.
 
 ## Description
 
-Draw with flowers in this little zen garden. Flowers of random shapes appear as we hover over the playground. Want to start over? Click on the rake.
+Each question has two vote options. In French.
 
 ## Built with
 
 - NextJS
-- Photopea for editing pictures
-- All assets are from https://unsplash.com/@wyxina
+- MongoDB
 
 ## [License](https://github.com/marinakinalone/le-journal/blob/main/LICENSE.txt)
 
