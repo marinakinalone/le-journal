@@ -1,0 +1,43 @@
+@use 'styles/variables' as *;
+
+$color-background: #fffcf7;
+$color-primary: #2d2d2d;
+
+.main__container {
+  background-color: $color-background;
+  z-index: 0;
+  font-family: $font-fenetres;
+  color: $color-primary;
+  height: 100vh;
+}
+
+.window__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame__container {
+  max-height: 80vh;
+  height: 80vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame__image {
+  height: 80vh;
+  width: auto;
+  position: absolute;
+  z-index: 2;
+}
+
+.frame__video {
+  position: relative;
+  top: 0;
+  left: 0;
+  max-height: 80vh;
+  z-index: 1;
+}
