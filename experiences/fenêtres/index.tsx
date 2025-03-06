@@ -1,5 +1,8 @@
 import { getDownloadURL, listAll, ref } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
+import Error from './Error'
+import Intro from './Intro'
+import Loading from './Loading'
 import Window from './Window'
 import styles from './styles/Fenetres.module.scss'
 import { storage } from './utils/firebase'
@@ -32,14 +35,13 @@ const getWindowInfo = (itemName: string): IWindowInfo => {
   }
 }
 
-// TODO add user interaction to trigger autoplay
-
 const Fenêtres = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
   const [windows, setWindows] = useState<IWindow[]>([])
   const [selectedWindow, setSelectedWindow] = useState<IWindow | null>(null)
   const [previousIndex, setPreviousIndex] = useState<number | null>(null)
+  const [windowOpened, setWindowOpened] = useState<boolean>(false)
 
   const fetchWindowList = async () => {
     const listRef = ref(storage, FIREBASE_FOLDER)
@@ -59,8 +61,9 @@ const Fenêtres = () => {
     }
   }
 
-  const handleOpenWindow = () => {
+  const getNewWindow = () => {
     if (windows.length > 0) {
+      setLoading(true)
       let randomIndex
       do {
         randomIndex = Math.floor(Math.random() * windows.length)
@@ -70,22 +73,32 @@ const Fenêtres = () => {
     }
   }
 
+  const handleVideoLoaded = () => {
+    setLoading(false)
+  }
+
   useEffect(() => {
     fetchWindowList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    handleOpenWindow()
+    getNewWindow()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windows])
 
   return (
     <div className={styles.main__container}>
-      {loading && <p>Loading...</p>}
-      {!loading && !error && selectedWindow && (
-        <Window {...selectedWindow} handleOpenWindow={handleOpenWindow} />
+      {loading && !windowOpened && <Intro handleStart={setWindowOpened} />}
+      {loading && windowOpened && <Loading />}
+      {windowOpened && !error && selectedWindow && (
+        <Window
+          {...selectedWindow}
+          handleOpenWindow={getNewWindow}
+          handleVideoLoaded={handleVideoLoaded}
+        />
       )}
-      {error && <p>Error fetching windows</p>}
+      {error && <Error />}
     </div>
   )
 }
