@@ -4,7 +4,10 @@ import Frame from './Frame'
 const Error = () => {
   return (
     <Frame>
-      <div>Looks like this window will not open. Please try again later.</div>
+      <div className={StyleSheet.e}>
+        <p>Looks like this window will not open...</p>
+        <p>Please try again later.</p>
+      </div>
     </Frame>
   )
 }
