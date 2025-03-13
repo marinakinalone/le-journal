@@ -94,6 +94,7 @@ const Fenêtres = () => {
       {windowOpened && !error && selectedWindow && (
         <Window
           {...selectedWindow}
+          loading={loading}
           handleOpenWindow={getNewWindow}
           handleVideoLoaded={handleVideoLoaded}
         />
