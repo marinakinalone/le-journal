@@ -35,6 +35,16 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    title: 'fenêtres',
+    metadata: {
+      description: 'window views from different places, a collection of memories',
+    },
+    config: {
+      isPortraitFormatAccepted: true,
+      shouldSupportAllFormats: true,
+    },
+  },
+  {
     new: true,
     title: 'internet is always right',
     metadata: {
@@ -50,18 +60,6 @@ export const experiencesData: IExperienceBasicData[] = [
     new: true,
     hidden: true,
     title: 'une minute',
-    metadata: {
-      description: 'TBD', // TODO Add description
-    },
-    config: {
-      isPortraitFormatAccepted: true,
-      shouldSupportAllFormats: true,
-    },
-  },
-  {
-    new: true,
-    hidden: true,
-    title: 'fenêtres',
     metadata: {
       description: 'TBD', // TODO Add description
     },

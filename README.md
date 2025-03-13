@@ -8,9 +8,6 @@ One of my most personal projects. Something between an interactive diary and a v
   - [Table of Contents](#table-of-contents)
   - [Built with](#built-with)
   - [Deployment](#deployment)
-  - [About this repository](#about-this-repository)
-    - [branch 'main'](#branch-main)
-    - [branch 'development'](#branch-development)
   - [Installation](#installation)
   - [Resources](#resources)
   - [Team](#team)
@@ -23,13 +20,7 @@ One of my most personal projects. Something between an interactive diary and a v
 
 ## Deployment
 
-[coming](https://)
-
-## About this repository
-
-### branch 'main'
-
-### branch 'development'
+[le journal](https://le-journal.vercel.app/)
 
 ## Installation
 
