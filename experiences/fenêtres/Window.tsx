@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import useTypingEffect from '../../main/hooks/useTypingEffect'
 import Frame from './Frame'
 import styles from './styles/Fenetres.module.scss'
 import { IWindow } from '.'
@@ -6,6 +7,7 @@ import { IWindow } from '.'
 interface IWindowFrame extends IWindow {
   handleOpenWindow: () => void
   handleVideoLoaded: () => void
+  loading: boolean
 }
 
 // TODO typing animation for the text ?
@@ -17,7 +19,11 @@ const Window = ({
   country,
   handleOpenWindow,
   handleVideoLoaded,
+  loading,
 }: IWindowFrame) => {
+  const text = `${city} in ${country}, ${month} ${year}`
+  const caption = useTypingEffect(text, 75, true)
+
   return (
     <section className={styles.window__container}>
       <Frame>
@@ -30,10 +36,19 @@ const Window = ({
           onLoadedData={handleVideoLoaded}
         />
       </Frame>
-      <p className={styles.window__caption}>{`${city} in ${country}, ${month} ${year}`}</p>
-      <button className={styles.window__button} onClick={() => handleOpenWindow()}>
-        open a new window
-      </button>
+      {!loading && (
+        <>
+          <p className={styles.window__caption}>{caption}</p>
+          <button
+            className={styles.window__button}
+            onClick={() => {
+              handleOpenWindow()
+            }}
+          >
+            open a new window
+          </button>
+        </>
+      )}
     </section>
   )
 }
