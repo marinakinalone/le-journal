@@ -46,6 +46,7 @@ const Fenêtres = () => {
   const fetchWindowList = async () => {
     const listRef = ref(storage, FIREBASE_FOLDER)
     try {
+      console.log('windowsList:')
       const windowsList = await listAll(listRef)
       const urls = await Promise.all(
         windowsList.items.map(async (item) => {
@@ -89,8 +90,9 @@ const Fenêtres = () => {
 
   return (
     <div className={styles.main__container}>
-      {loading && !windowOpened && <Intro handleStart={setWindowOpened} />}
-      {loading && windowOpened && <Loading />}
+      {error && <Error />}
+      {!error && loading && !windowOpened && <Intro handleStart={setWindowOpened} />}
+      {!error && loading && windowOpened && <Loading />}
       {windowOpened && !error && selectedWindow && (
         <Window
           {...selectedWindow}
@@ -99,7 +101,6 @@ const Fenêtres = () => {
           handleVideoLoaded={handleVideoLoaded}
         />
       )}
-      {error && <Error />}
     </div>
   )
 }

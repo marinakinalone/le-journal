@@ -1,4 +1,6 @@
+import cx from 'classnames'
 import React from 'react'
+import styles from '../../styles/InternetIsAlwaysRight.module.scss'
 
 interface IQuestionCard {
   question: string
@@ -8,11 +10,11 @@ interface IQuestionCard {
 
 const QuestionCard = ({ question, option1, option2 }: IQuestionCard) => {
   return (
-    <div>
-      <h1>{question}</h1>
-      <div>
-        <h2>{option1}</h2>
-        <h2>{option2}</h2>
+    <div className={styles.card__container}>
+      <h2 className={styles.card__title}>{question}</h2>
+      <div className={styles.answers__container}>
+        <button className={cx(styles.button__answer, styles.answer__left)}>{option1}</button>
+        <button className={cx(styles.button__answer, styles.answer__right)}>{option2}</button>
       </div>
     </div>
   )

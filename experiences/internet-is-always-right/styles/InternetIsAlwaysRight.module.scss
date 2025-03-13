@@ -1,14 +1,77 @@
 @use 'styles/variables' as *;
 
-.mainContainer {
+$color-background-lines: #e0e0e0;
+$color-background: #f3e9f4;
+$color-primary: #1d4250;
+$color-rainbow-1: #c6a8dc;
+$color-rainbow-2: #f1c4da;
+$color-rainbow-3: #eacbb9;
+$color-rainbow-4: #d9dbab;
+$color-rainbow-5: #b9d9d9;
+$color-rainbow-6: #cbcfec;
+
+.main__container {
+  background-color: $color-background;
+  background-image: linear-gradient($color-background-lines, 1px, transparent 1px),
+    linear-gradient(90deg, $color-background-lines, 1px, transparent 1px);
+  background-size: 40px 40px;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  font-family: $font-internet-is-always-right;
+}
+
+.main__header {
+  margin-top: 0;
+  text-align: center;
+  padding-top: 1.5rem;
+  text-transform: uppercase;
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.card__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: #141c2b;
-  color: #049470;
-  font-family: $font-jardinage-graphique;
-  height: 100vh;
+  justify-content: space-between;
+  margin: 2rem 1rem;
+  border: 1px solid $color-primary;
+  min-width: 240px;
+  max-width: 500px;
+  border-radius: 16px;
+  background-color: $color-rainbow-1; // TODO change logic
+  height: 9rem;
+  box-shadow: 4px 4px 0 0 $color-primary;
 }
 
+.card__title {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+
+.answers__container {
+  border-top: 1px solid $color-primary;
+  height: 3rem;
+  min-height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button__answer {
+  background-color: transparent;
+  font-family: $font-internet-is-always-right;
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+.answer__left {
+  border-right: 1px solid $color-primary;
+}

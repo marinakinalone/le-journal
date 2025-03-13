@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
 import QuestionCard from './components/QuestionCard'
+import styles from './styles/InternetIsAlwaysRight.module.scss'
 
 interface IOption {
   label: string
@@ -40,7 +41,7 @@ const InternetIsAlwaysRight = () => {
 
   console.log('data', data)
   return (
-    <div>
+    <div className={styles.main__container}>
       <Header />
       {data.map(
         (item) =>
