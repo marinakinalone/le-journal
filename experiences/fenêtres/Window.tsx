@@ -30,7 +30,6 @@ const Window = ({
         <video
           className={styles.frame__video}
           src={url}
-          controls
           autoPlay
           loop
           onLoadedData={handleVideoLoaded}
