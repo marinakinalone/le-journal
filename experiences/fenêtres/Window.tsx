@@ -31,8 +31,8 @@ const Window = ({
           src={url}
           autoPlay
           loop
-          playsInline
           onLoadedData={handleVideoLoaded}
+          controlsList="nofullscreen"
         />
       </Frame>
       {!loading && (
