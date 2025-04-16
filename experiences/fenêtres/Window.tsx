@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useTypingEffect from '../../main/hooks/useTypingEffect'
 import Frame from './Frame'
 import styles from './styles/Fenetres.module.scss'
@@ -10,7 +10,6 @@ interface IWindowFrame extends IWindow {
   loading: boolean
 }
 
-// TODO typing animation for the text ?
 const Window = ({
   url,
   year,
@@ -32,6 +31,7 @@ const Window = ({
           src={url}
           autoPlay
           loop
+          playsInline
           onLoadedData={handleVideoLoaded}
         />
       </Frame>
