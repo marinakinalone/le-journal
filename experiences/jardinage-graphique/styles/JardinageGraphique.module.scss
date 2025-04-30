@@ -39,11 +39,30 @@
 
 .flower {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
+  animation: swashIn 60ms ease forwards;
+}
+
+@keyframes swashIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
+  }
+  90% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(0.9, 0.9);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
+  }
 }
 
 .buttonImage {

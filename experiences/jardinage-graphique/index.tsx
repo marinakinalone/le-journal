@@ -11,7 +11,7 @@ interface Flower {
 
 const JardinageGraphique = () => {
   const [flowers, setFlowers] = useState<Flower[]>([])
-  const lastPlacedFlowerRef = useRef<{ x: number; y: number; time: number } | null>(null)
+  const lastPlacedFlowerRef = useRef<{ x: number; y: number;} | null>(null)
   const gardenRef = useRef<HTMLDivElement>(null)
   const flowerId = useRef(0)
 
@@ -21,26 +21,27 @@ const JardinageGraphique = () => {
     const rect = gardenRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-    const now = Date.now()
 
     const last = lastPlacedFlowerRef.current
     const dist =
       last &&
       Math.sqrt(Math.pow(x - last.x, 2) + Math.pow(y - last.y, 2))
 
-    if (!last || (dist && dist > 60 && now - last.time > 10)) {
+    // The flower is 50px wide
+    if (!last || (dist && dist > 50)) {
       const type = Math.floor(Math.random() * 12).toString().padStart(2, '0')
       setFlowers((prev) => [
         ...prev,
         { x, y, id: flowerId.current++, type }
       ])
-      lastPlacedFlowerRef.current = { x, y, time: now }
+      lastPlacedFlowerRef.current = { x, y }
     }
   }
 
   useEffect(() => {
     const container = gardenRef.current
     if (!container) return
+    
     container.addEventListener('mousemove', handleMouseMove)
     return () => container.removeEventListener('mousemove', handleMouseMove)
   }, [])
