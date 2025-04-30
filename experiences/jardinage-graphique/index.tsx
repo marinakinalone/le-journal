@@ -1,44 +1,59 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './styles/JardinageGraphique.module.scss'
 
+interface Flower {
+  x: number
+  y: number
+  id: number
+  type: string
+}
+
 const JardinageGraphique = () => {
-  const [rows, setRows] = useState(14)
-  const [columns, setColumns] = useState(18)
-  const imageRef = useRef<HTMLImageElement>(null)
+  const [flowers, setFlowers] = useState<Flower[]>([])
+  const lastPlacedFlowerRef = useRef<{ x: number; y: number; time: number } | null>(null)
+  const gardenRef = useRef<HTMLDivElement>(null)
+  const flowerId = useRef(0)
 
-  const [hoveredDots, setHoveredDots] = useState(Array(rows * columns).fill(null))
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!gardenRef.current) return
 
-  const handleHover = (index: number) => {
-    setHoveredDots((prev) => {
-      const updatedDots = [...prev]
-      const randomNumber = Math.floor(Math.random() * 12)
-        .toString()
-        .padStart(2, '0')
-      updatedDots[index] = randomNumber
-      return updatedDots
-    })
+    const rect = gardenRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const now = Date.now()
+
+    const last = lastPlacedFlowerRef.current
+    const dist =
+      last &&
+      Math.sqrt(Math.pow(x - last.x, 2) + Math.pow(y - last.y, 2))
+
+    if (!last || (dist && dist > 60 && now - last.time > 10)) {
+      const type = Math.floor(Math.random() * 12).toString().padStart(2, '0')
+      setFlowers((prev) => [
+        ...prev,
+        { x, y, id: flowerId.current++, type }
+      ])
+      lastPlacedFlowerRef.current = { x, y, time: now }
+    }
   }
 
-  const updateGridSize = () => {
-    if (imageRef.current) {
-      const { width, height } = imageRef.current.getBoundingClientRect()
-      const newColumns = Math.floor(width / 70)
-      const newRows = Math.floor(height / 70)
-      setColumns(newColumns)
-      setRows(newRows)
-      setHoveredDots(Array(newRows * newColumns).fill(null))
-    }
+  useEffect(() => {
+    const container = gardenRef.current
+    if (!container) return
+    container.addEventListener('mousemove', handleMouseMove)
+    return () => container.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
+  const resetGarden = () => {
+    setFlowers([])
+    lastPlacedFlowerRef.current = null
   }
 
   return (
     <div className={styles.mainContainer}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Jardinage Graphique</h1>
-        <button
-          className={styles.resetButton}
-          onClick={() => setHoveredDots(Array(rows * columns).fill(null))}
-        >
+        <button className={styles.resetButton} onClick={resetGarden}>
           <img
             className={styles.buttonImage}
             src="/resources/jardinage-graphique/rake.png"
@@ -46,32 +61,24 @@ const JardinageGraphique = () => {
           />
         </button>
       </div>
-      <section className={styles.gardenContainer}>
+      <section className={styles.gardenContainer} ref={gardenRef}>
         <img
-          ref={imageRef}
           src="/resources/jardinage-graphique/background.jpg"
           alt="Background"
           className={styles.backgroundImage}
-          onLoad={updateGridSize}
         />
-        <div
-          className={styles.dotGrid}
-          style={{
-            gridTemplateColumns: `repeat(${columns}, 60px)`,
-            gridTemplateRows: `repeat(${rows}, 60px)`,
-          }}
-        >
-          {Array.from({ length: rows * columns }).map((_, index) => (
-            <div key={index} className={styles.dot} onMouseEnter={() => handleHover(index)}>
-              {hoveredDots[index] && (
-                <img
-                  src={`/resources/jardinage-graphique/fleur_${hoveredDots[index]}.png`}
-                  alt="Flower"
-                />
-              )}
-            </div>
-          ))}
-        </div>
+        {flowers.map((flower) => (
+          <img
+            key={flower.id}
+            src={`/resources/jardinage-graphique/fleur_${flower.type}.png`}
+            alt="Flower"
+            className={styles.flower}
+            style={{
+              left: `${flower.x}px`,
+              top: `${flower.y}px`,
+            }}
+          />
+        ))}
       </section>
     </div>
   )
