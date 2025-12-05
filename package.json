@@ -10,7 +10,8 @@
     "lint:staged": "eslint $(git diff --cached --name-only --diff-filter=ACM \"*.ts\" \"*.tsx\" | sed 's| |\\\\ |g')",
     "prettier": "prettier --write **/*.{ts,tsx}",
     "prettier:staged": "prettier --write $(git diff --cached --name-only --diff-filter=ACM \"*.ts\" \"*.tsx\" | sed 's| |\\\\ |g')",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "knip": "knip"
   },
   "dependencies": {
     "firebase": "^11.4.0",
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",
-    "@types/node": "20.6.2",
+    "@types/node": "^24.10.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/ua-parser-js": "^0.7.37",
@@ -31,8 +32,9 @@
     "classnames": "^2.3.2",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "knip": "^5.71.0",
     "prettier": "^3.0.3",
     "sass": "^1.67.0",
-    "typescript": "5.2.2"
+    "typescript": "^5.9.3"
   }
 }

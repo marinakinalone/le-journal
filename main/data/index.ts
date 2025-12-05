@@ -1,6 +1,11 @@
 import { experiencesData } from './experiences'
 
-const getIdFromExperienceTitle = (title: string) => title.replace(/ /g, '-').toLocaleLowerCase()
+const getIdFromExperienceTitle = (title: string) => 
+  title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+    .replace(/ /g, '-')
+    .toLocaleLowerCase()
 
 export const experiences = experiencesData.map((experience) => {
   const { title, music, hidden } = experience

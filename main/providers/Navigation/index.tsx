@@ -1,138 +1,64 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, { createContext, ReactNode, useCallback, useEffect } from 'react'
 import { PATH } from '../../constants'
-import { experiences } from '../../data'
-import { isLandscapeOrientation, isMobileDevice } from './utils'
 
 export interface INavigationContext {
-  //  displayIntroModal: boolean
-  // setDisplayIntroModal?: React.Dispatch<React.SetStateAction<boolean>>
   redirectToHome: () => void
-  setCurrentExperience: React.Dispatch<React.SetStateAction<string>>
-  children?: ReactNode
+  goBack: () => void
+  currentExperienceId: string | null
+  isHome: boolean
+  isExperience: boolean
 }
-
-const { HOME, NOT_SUPPORTED } = PATH
 
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
+const { HOME } = PATH
+
 const NavigationProvider = ({ children }: { children: ReactNode }) => {
-  const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
-  // const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
-  const [savedPath, setSavedPath] = useState('')
-  const [currentExperience, setCurrentExperience] = useState('')
-  const [navigationConfig, setNavigationConfig] = useState<
-    Partial<{
-      isPortraitFormatAccepted: boolean
-      shouldSupportAllFormats: boolean
-    }>
-  >({})
-
-  const isSupportedDevice = !isMobileDevice()
-
   const router = useRouter()
 
-  const redirectToHome = () => {
+  const redirectToHome = useCallback(() => {
     if (router.pathname !== HOME) {
       router.push(HOME)
     }
-  }
+  }, [router])
 
-  const redirectToNotSupported = () => {
-    if (router.pathname !== NOT_SUPPORTED) {
-      setSavedPath(router.asPath)
-      router.push(NOT_SUPPORTED)
-    }
-  }
-
-  const handleNavigation = () => {
-    if (savedPath && savedPath !== NOT_SUPPORTED) {
-      router.push(savedPath)
+  const goBack = useCallback(() => {
+    if (window.history.length > 1 && document.referrer) {
+      router.back()
     } else {
       redirectToHome()
     }
-  }
+  }, [router, redirectToHome])
 
-  useEffect(() => {
-    if (router.asPath !== NOT_SUPPORTED) {
-      setSavedPath(router.asPath)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath])
+  const currentExperienceId =
+    router.pathname === '/experience/[id]' ? (router.query.id as string) || null : null
+  const isHome = router.pathname === HOME
+  const isExperience = router.pathname === '/experience/[id]'
 
+  // Handle Escape key to go back home from experiences
   useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
-      if (event.key === 'Escape') {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isExperience) {
         redirectToHome()
       }
     }
     window.addEventListener('keydown', handleKeyDown)
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLandscape(isLandscapeOrientation())
-    }
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleOrientationChange = (event: MediaQueryListEvent) => {
-      setIsLandscape(event.matches)
-    }
-
-    const mediaQueryList = window.matchMedia('(orientation: landscape)')
-    mediaQueryList.addEventListener('change', handleOrientationChange)
-
-    return () => {
-      mediaQueryList.removeEventListener('change', handleOrientationChange)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (currentExperience) {
-      const experience = experiences.find((exp) => exp.id === currentExperience)
-
-      if (experience && experience.config) {
-        setNavigationConfig(experience.config)
-      }
-    }
-  }, [currentExperience])
-
-  useEffect(() => {
-    if (
-      currentExperience &&
-      navigationConfig.isPortraitFormatAccepted !== undefined &&
-      navigationConfig.shouldSupportAllFormats !== undefined
-    ) {
-      const { isPortraitFormatAccepted, shouldSupportAllFormats } = navigationConfig
-
-      if (!shouldSupportAllFormats) {
-        if ((!isLandscape && !isPortraitFormatAccepted) || !isSupportedDevice) {
-          redirectToNotSupported()
-        } else if (router.pathname === NOT_SUPPORTED) {
-          handleNavigation()
-        }
-      } else if (!isLandscape && !isPortraitFormatAccepted) {
-        redirectToNotSupported()
-      } else if (router.pathname === NOT_SUPPORTED) {
-        handleNavigation()
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLandscape, isSupportedDevice, navigationConfig, currentExperience])
+  }, [isExperience, redirectToHome])
 
   return (
-    <NavigationContext.Provider value={{ redirectToHome, setCurrentExperience }}>
+    <NavigationContext.Provider
+      value={{
+        redirectToHome,
+        goBack,
+        currentExperienceId,
+        isHome,
+        isExperience,
+      }}
+    >
       {children}
     </NavigationContext.Provider>
   )
