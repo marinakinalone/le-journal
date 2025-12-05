@@ -15,7 +15,7 @@
   "dependencies": {
     "firebase": "^11.4.0",
     "firebase-admin": "^13.1.0",
-    "next": "latest",
+    "next": "15.5.7",
     "react": "latest",
     "react-audio-player": "^0.17.0",
     "react-dom": "latest",
