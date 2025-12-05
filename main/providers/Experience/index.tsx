@@ -4,7 +4,7 @@ import { experiences } from '../../data'
 import { IExperienceInfo } from '../../data/experiencesTypes'
 
 interface IExperienceContext extends IExperienceInfo {
-  updateExperienceContext: (newContext: IExperienceInfo) => void
+  updateExperienceContext: (newContext: Partial<IExperienceInfo>) => void
   children?: ReactNode
 }
 

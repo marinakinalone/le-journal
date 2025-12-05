@@ -1,19 +1,19 @@
 import { useContext } from 'react'
+import { IExperienceInfo, IExperienceMusic } from '../../data/experiencesTypes'
 import { ExperienceContext } from '../../providers/Experience'
-import { IExperienceInfo } from '../../data/experiencesTypes'
 
-// More flexible type that allows boolean values for hidden and new
-type FlexibleExperienceUpdate = Omit<Partial<IExperienceInfo>, 'hidden' | 'new'> & {
+
+type FlexibleExperienceUpdate = Omit<Partial<IExperienceInfo>, 'hidden' | 'new' | 'music'> & {
   hidden?: boolean
   new?: boolean
+  music?: Partial<IExperienceMusic> & { source: string }
 }
 
 const useExperienceData = () => {
   const experienceContext = useContext(ExperienceContext)
 
   const updateCurrentExperienceData = (newContext: FlexibleExperienceUpdate) => {
-    // Normalize the context: convert boolean false to undefined, true stays as true
-    const normalizedContext: Partial<IExperienceInfo> = { ...newContext }
+    const normalizedContext = { ...newContext }
     
     if ('hidden' in newContext) {
       if (newContext.hidden === false) {
