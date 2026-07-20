@@ -4,7 +4,7 @@ export interface IExperienceMusic {
   source: string
 }
 
-export interface IExperienceMetadata {
+interface IExperienceMetadata {
   description: string
 }
 export interface IExperienceBasicData {
@@ -19,7 +19,7 @@ export interface IExperienceBasicData {
   }
 }
 
-export interface IExperienceFavicons {
+interface IExperienceFavicons {
   favicon16: string
   favicon32: string
   appleTouchIcon: string

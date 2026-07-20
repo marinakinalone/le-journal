@@ -23,8 +23,6 @@ const LinkToExperience = ({ index, ...experience }: ILinkToExperience) => {
       ...experience,
     })
   }
-  const ExperienceTitle = () => <span className={styles.text}>{experience.title}</span>
-
   return (
     <li className={styles[`experience_${index}`]}>
       <Link
@@ -37,8 +35,8 @@ const LinkToExperience = ({ index, ...experience }: ILinkToExperience) => {
         </span>
         <span className={styles.wrapper}>
           <span className={styles.text}>
-            {experience.new ? <NewExperienceLabel /> : <></>}
-            <ExperienceTitle />
+            {experience.new ? <NewExperienceLabel /> : null}
+            <span className={styles.text}>{experience.title}</span>
           </span>
 
           <span className={cx(styles.arrow, styles.right)}>

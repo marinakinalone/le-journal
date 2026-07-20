@@ -5,20 +5,10 @@ import Intro from './Intro'
 import Loading from './Loading'
 import Window from './Window'
 import styles from './styles/Fenetres.module.scss'
+import { IWindow, IWindowInfo } from './types'
 import { storage } from './utils/firebase'
 
 const FIREBASE_FOLDER = 'fenetres'
-
-interface IWindowInfo {
-  year: string
-  month: string
-  city: string
-  country: string
-}
-
-export interface IWindow extends IWindowInfo {
-  url: string
-}
 
 const getWindowInfo = (itemName: string): IWindowInfo => {
   const [yearMonth, cityCountry] = itemName.split(' - ')
@@ -46,6 +36,7 @@ const Fenêtres = () => {
   const fetchWindowList = async () => {
     const listRef = ref(storage, FIREBASE_FOLDER)
     try {
+      console.log('windowsList:')
       const windowsList = await listAll(listRef)
       const urls = await Promise.all(
         windowsList.items.map(async (item) => {
@@ -79,7 +70,6 @@ const Fenêtres = () => {
 
   useEffect(() => {
     fetchWindowList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -89,8 +79,9 @@ const Fenêtres = () => {
 
   return (
     <div className={styles.main__container}>
-      {loading && !windowOpened && <Intro handleStart={setWindowOpened} />}
-      {loading && windowOpened && <Loading />}
+      {error && <Error />}
+      {!error && loading && !windowOpened && <Intro handleStart={setWindowOpened} />}
+      {!error && loading && windowOpened && <Loading />}
       {windowOpened && !error && selectedWindow && (
         <Window
           {...selectedWindow}
@@ -99,7 +90,6 @@ const Fenêtres = () => {
           handleVideoLoaded={handleVideoLoaded}
         />
       )}
-      {error && <Error />}
     </div>
   )
 }

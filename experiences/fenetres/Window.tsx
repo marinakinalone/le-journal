@@ -2,7 +2,7 @@ import React from 'react'
 import useTypingEffect from '../../main/hooks/useTypingEffect'
 import Frame from './Frame'
 import styles from './styles/Fenetres.module.scss'
-import { IWindow } from '.'
+import { IWindow } from './types'
 
 interface IWindowFrame extends IWindow {
   handleOpenWindow: () => void
