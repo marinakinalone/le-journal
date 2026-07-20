@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+@use '../../../styles/variables' as *;
 
 $color-background-lines: #e0e0e0;
 $color-background: #f3e9f4;
@@ -9,6 +9,10 @@ $color-rainbow-3: #eacbb9;
 $color-rainbow-4: #d9dbab;
 $color-rainbow-5: #b9d9d9;
 $color-rainbow-6: #cbcfec;
+// Result bar fills — WCAG AA (≥3:1) vs track and vs each other
+$color-bar-left: $color-primary; // ~9.9:1 vs white
+$color-bar-right: #6b8f9a; // ~3.5:1 vs white, ~3.1:1 vs left
+$color-bar-track: #ffffff;
 
 .main__container {
   background-color: $color-background;
@@ -19,6 +23,9 @@ $color-rainbow-6: #cbcfec;
   height: 100%;
   min-height: 100vh;
   font-family: $font-internet-is-always-right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main__header {
@@ -30,6 +37,56 @@ $color-rainbow-6: #cbcfec;
   font-weight: 600;
 }
 
+.error__message {
+  margin: 1.5rem 1rem;
+  padding: 1rem 1.25rem;
+  max-width: 500px;
+  text-align: center;
+  border: 1px solid $color-primary;
+  border-radius: 16px;
+  background-color: $color-rainbow-2;
+  box-shadow: 4px 4px 0 0 $color-primary;
+  color: $color-primary;
+  font-weight: 600;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 1rem;
+  color: $color-primary;
+}
+
+.loader__dot {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: $color-primary;
+  box-shadow: 3px 3px 0 0 $color-rainbow-1;
+  animation: loaderPulse 0.9s ease-in-out infinite;
+}
+
+.loader__text {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+@keyframes loaderPulse {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
 .card__container {
   display: flex;
   flex-direction: column;
@@ -37,12 +94,43 @@ $color-rainbow-6: #cbcfec;
   justify-content: space-between;
   margin: 2rem 1rem;
   border: 1px solid $color-primary;
+  width: calc(100% - 2rem);
   min-width: 240px;
   max-width: 500px;
   border-radius: 16px;
-  background-color: $color-rainbow-1; // TODO change logic
   height: 9rem;
   box-shadow: 4px 4px 0 0 $color-primary;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card__rainbow_1 {
+  background-color: $color-rainbow-1;
+}
+
+.card__rainbow_2 {
+  background-color: $color-rainbow-2;
+}
+
+.card__rainbow_3 {
+  background-color: $color-rainbow-3;
+}
+
+.card__rainbow_4 {
+  background-color: $color-rainbow-4;
+}
+
+.card__rainbow_5 {
+  background-color: $color-rainbow-5;
+}
+
+.card__rainbow_6 {
+  background-color: $color-rainbow-6;
+}
+
+.card__result {
+  height: auto;
+  min-height: 9rem;
 }
 
 .card__title {
@@ -70,8 +158,93 @@ $color-rainbow-6: #cbcfec;
   height: 100%;
   cursor: pointer;
   border: none;
+  color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: $color-background;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }
 
 .answer__left {
   border-right: 1px solid $color-primary;
+  border-bottom-left-radius: 15px;
+}
+
+.answer__right {
+  border-bottom-right-radius: 15px;
+}
+
+.stat__container {
+  border-top: 1px solid $color-primary;
+  width: 100%;
+  padding: 0.65rem 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.stat__comments,
+.stat__percentages {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.stat__comment {
+  font-size: 0.75rem;
+  color: $color-primary;
+  max-width: 48%;
+  line-height: 1.2;
+
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.stat__percent {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $color-primary;
+}
+
+.stat__bar {
+  display: flex;
+  width: 100%;
+  height: 0.85rem;
+  border: 1px solid $color-primary;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: $color-bar-track;
+}
+
+.stat__fill_left,
+.stat__fill_right {
+  height: 100%;
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stat__fill_left {
+  background-color: $color-bar-left;
+}
+
+.stat__fill_right {
+  background-color: $color-bar-right;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

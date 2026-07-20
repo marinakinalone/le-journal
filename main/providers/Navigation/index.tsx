@@ -57,7 +57,6 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
     if (router.asPath !== NOT_SUPPORTED) {
       setSavedPath(router.asPath)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath])
 
   useEffect(() => {

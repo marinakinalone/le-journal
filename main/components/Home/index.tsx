@@ -47,7 +47,7 @@ const Home: NextPage = () => {
             <a href="https://kinalone.dev" target="_blank" rel="noopener noreferrer">
               mks
             </a>{' '}
-            © 2024 |{' '}
+            © 2026 |{' '}
             <a
               href="https://github.com/marinakinalone?tab=repositories"
               target="_blank"

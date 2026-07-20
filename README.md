@@ -25,10 +25,9 @@ One of my most personal projects. Something between an interactive diary and a v
 ## Installation
 
 ```bash
-
 nvm use
-bun i
-bun run dev
+npm install
+npm run dev
 ```
 
 ## Resources

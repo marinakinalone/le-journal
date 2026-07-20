@@ -2,6 +2,8 @@
 
 A series of debates that we want to settle and who could a better judge than the mighty Internet?
 
+![Figma example — rainbow question cards](./assets/figma-example.png)
+
 ## Table of Contents
 
 - [\[Internet is always right\]](#internet-is-always-right)
