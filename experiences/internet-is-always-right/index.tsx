@@ -137,6 +137,9 @@ const InternetIsAlwaysRight = () => {
             )}
           </React.Fragment>
         ))}
+      <p className={styles.cookie__notice}>
+        Un cookie local mémorise les votes pour éviter les doublons (1 an, pas de suivi publicitaire).
+      </p>
     </div>
   )
 }

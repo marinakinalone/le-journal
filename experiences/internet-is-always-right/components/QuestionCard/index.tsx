@@ -1,5 +1,4 @@
 import cx from 'classnames'
-import React from 'react'
 import { getRainbowClass } from '../../lib/getRainbowClass'
 import styles from '../../styles/InternetIsAlwaysRight.module.scss'
 
