@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import clientPromise from '../../experiences/internet-is-always-right/lib/mongodb'
+import getClientPromise from '../../experiences/internet-is-always-right/lib/mongodb'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const client = await clientPromise
+    const client = await getClientPromise()
     const db = client.db('internetIsAlwaysRight')
-    console.log('db', db)
     const data = await db.collection('questions').find({}).toArray()
 
     res.status(200).json(data)

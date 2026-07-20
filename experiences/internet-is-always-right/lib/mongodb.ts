@@ -1,28 +1,32 @@
 import { MongoClient } from 'mongodb'
 
 declare global {
-  // eslint-disable-next-line no-var
-  var _mongoClientPromise: Promise<MongoClient>
+  var _mongoClientPromise: Promise<MongoClient> | undefined
 }
 
-const uri = process.env.MONGO_URI as string
-let client: MongoClient
-let clientPromise: Promise<MongoClient>
+const uri = process.env.MONGO_URI
 
-if (!process.env.MONGO_URI) {
-  throw new Error('Please add your Mongo URI to .env.local')
-}
+let clientPromise: Promise<MongoClient> | undefined
 
-if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable so the client is not recreated on every request
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri)
-    global._mongoClientPromise = client.connect()
+function getClientPromise(): Promise<MongoClient> {
+  if (!uri) {
+    throw new Error('Please add your Mongo URI to .env.local')
   }
-  clientPromise = global._mongoClientPromise
-} else {
-  client = new MongoClient(uri)
-  clientPromise = client.connect()
+
+  if (process.env.NODE_ENV === 'development') {
+    if (!global._mongoClientPromise) {
+      const client = new MongoClient(uri)
+      global._mongoClientPromise = client.connect()
+    }
+    return global._mongoClientPromise
+  }
+
+  if (!clientPromise) {
+    const client = new MongoClient(uri)
+    clientPromise = client.connect()
+  }
+
+  return clientPromise
 }
 
-export default clientPromise
+export default getClientPromise

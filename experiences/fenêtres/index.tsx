@@ -5,20 +5,10 @@ import Intro from './Intro'
 import Loading from './Loading'
 import Window from './Window'
 import styles from './styles/Fenetres.module.scss'
+import { IWindow, IWindowInfo } from './types'
 import { storage } from './utils/firebase'
 
 const FIREBASE_FOLDER = 'fenetres'
-
-interface IWindowInfo {
-  year: string
-  month: string
-  city: string
-  country: string
-}
-
-export interface IWindow extends IWindowInfo {
-  url: string
-}
 
 const getWindowInfo = (itemName: string): IWindowInfo => {
   const [yearMonth, cityCountry] = itemName.split(' - ')
@@ -80,7 +70,6 @@ const Fenêtres = () => {
 
   useEffect(() => {
     fetchWindowList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
