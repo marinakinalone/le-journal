@@ -10,7 +10,6 @@ interface IWindowFrame extends IWindow {
   loading: boolean
 }
 
-// TODO typing animation for the text ?
 const Window = ({
   url,
   year,
@@ -30,10 +29,10 @@ const Window = ({
         <video
           className={styles.frame__video}
           src={url}
-          controls
           autoPlay
           loop
           onLoadedData={handleVideoLoaded}
+          controlsList="nofullscreen"
         />
       </Frame>
       {!loading && (

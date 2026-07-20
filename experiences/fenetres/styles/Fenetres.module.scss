@@ -52,6 +52,7 @@ $color-primary: #2d2d2d;
   border: none;
   background-color: transparent;
   text-decoration: underline;
+  color: $color-primary;
   &:hover {
     text-decoration: none;
   }
@@ -81,6 +82,7 @@ $color-primary: #2d2d2d;
   border: none;
   background-color: transparent;
   text-decoration: underline;
+  color: $color-primary;
   &:hover {
     text-decoration: none;
   }
