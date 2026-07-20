@@ -335,4 +335,132 @@ export const palettes: IPalette[] = [
       tertiary: '##a89fb3',
     },
   },
+  {
+    name: 'cactus flower',
+    colors: {
+      background: '#59725b',
+      primary: '#f7ede4',
+      accents: ['#a38f6c', '#c7b89b', '#e0b8b0'],
+    },
+  },
+  {
+    name: 'grapefruit cocktail',
+    colors: {
+      background: '#cc725c',
+      primary: '#e8e1e3',
+      accents: ['#e0c1ba', '#f5bb27','#e89f74'],
+    },
+  },
+  {
+    name: 'golden curtains',
+    colors: {
+      background: '#c8963f',
+      primary: '#fcecc7',
+      secondary: '#8a3e0f',
+      tertiary: '#3d5526',
+      accents: ['#d9cead', '#ab9a6f', '#857a5b'],
+    },
+  },
+  {
+    name: 'rose tree',
+    colors: {
+      background: '#0f2c21',
+      primary: '#bd777f',
+      secondary: '#ffd9da',
+      tertiary: '#4d0012',
+    },
+  },
+  {
+    name: 'summer villa',
+    colors: {
+      background: '#e8c792',
+      primary: '#d16324',
+      secondary: '#ad441d',
+      tertiary: '#8a8436',
+      accents: ['#534021'],
+    },
+  },
+  {
+    name: 'stem heroine',
+    colors: {
+      background: '#dbcece',
+      primary: '#614156',
+      secondary: '#342c36',
+      accents: ['#845831', '#F0A605'],
+    },
+  },
+  {
+    name: 'art exhibition',
+    colors: {
+      background: '#d96950',
+      primary: '#fcefde',
+      secondary: '#d9b6d6',
+      tertiary: '#798f77',
+    },
+  },
+  {
+    name: 'above the chinese restaurant',
+    colors: {
+      background: '#324a87',
+      primary: '#e8a831',
+      secondary: '#d13732',
+    },
+  },
+  {
+    name: 'lucky charm',
+    colors: {
+      background: '#f5e0b3',
+      primary: '#ad342b',
+      secondary: '#3ba181',
+    },
+  },
+  {
+    name: 'summer sorbet',
+    colors: {
+      background: '#b2e3a6',
+      primary: '#fffac4',
+      secondary: '#fc9aa5',
+    },
+  },
+  {
+    name: 'city pop',
+    colors: {
+      background: '#ed9595',
+      primary: '#000000',
+      secondary: '#ffe9d6',
+      tertiary: '#f5baba',
+    },
+  },
+  {
+    name: 'moon festival',
+    colors: {
+      background: '#ba443d',
+      primary: '#ebc996',
+      secondary: '#db9e60',
+    },
+  },
+  {
+    name: 'adventure game',
+    colors: {
+      background: '#2b241d',
+      primary: '#c29557',
+      accents: ['#a16330', '#918f47', '#3f634d'],
+    },
+  },
+  {
+    name: 'submarine',
+    colors: {
+      background: '#065453',
+      primary: '#62a19f',
+      secondary: '#f5eabc',
+    },
+  },
+  {
+    name: 'science fair',
+    colors: {
+      background: '#1e223d',
+      primary: '#f54e1b',
+      secondary: '#e8d7b7',
+    },
+  },
 ]
