@@ -1,4 +1,4 @@
-interface IExperienceMusic {
+export interface IExperienceMusic {
   artist: string
   song: string
   source: string
