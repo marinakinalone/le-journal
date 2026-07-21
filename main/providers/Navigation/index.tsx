@@ -1,67 +1,65 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
-import { isLandscapeOrientation, isMobileDevice } from './utils'
+import React, { createContext, ReactNode, useCallback, useEffect } from 'react'
+import { PATH } from '../../constants'
 
 export interface INavigationContext {
-  displayIntroModal: boolean
-  setDisplayIntroModal?: React.Dispatch<React.SetStateAction<boolean>>
   redirectToHome: () => void
-  children?: ReactNode
+  goBack: () => void
+  currentExperienceId: string | null
+  isHome: boolean
+  isExperience: boolean
 }
 
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
+const { HOME } = PATH
+const NOT_SUPPORTED = PATH.NOT_SUPPORTED
+
 const NavigationProvider = ({ children }: { children: ReactNode }) => {
-  const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
-  const [displayIntroModal, setDisplayIntroModal] = useState(false) // TODO: set to true for production.
-
-  const isSupportedDevice = !isMobileDevice()
-
   const router = useRouter()
 
-  const redirectToHome = () => {
-    router.push('/')
-  }
+  const redirectToHome = useCallback(() => {
+    if (router.pathname !== HOME) {
+      router.push(HOME)
+    }
+  }, [router])
+
+  const goBack = useCallback(() => {
+    if (window.history.length > 1 && document.referrer) {
+      router.back()
+    } else {
+      redirectToHome()
+    }
+  }, [router, redirectToHome])
+
+  const currentExperienceId =
+    router.pathname === '/experience/[id]' ? (router.query.id as string) || null : null
+  const isHome = router.pathname === HOME
+  const isExperience = router.pathname === '/experience/[id]'
+  const isFormatNotSupported = router.pathname === NOT_SUPPORTED
 
   useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
-      if (event.key === 'Escape') {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && (isExperience || isFormatNotSupported)) {
         redirectToHome()
       }
     }
     window.addEventListener('keydown', handleKeyDown)
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLandscape(isLandscapeOrientation())
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!isLandscape || !isSupportedDevice) {
-      router.push('/format-not-supported')
-    }
-
-    if (isLandscape && isSupportedDevice) {
-      redirectToHome()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLandscape])
+  }, [isExperience, isFormatNotSupported, redirectToHome])
 
   return (
-    <NavigationContext.Provider value={{ displayIntroModal, setDisplayIntroModal, redirectToHome }}>
+    <NavigationContext.Provider
+      value={{
+        redirectToHome,
+        goBack,
+        currentExperienceId,
+        isHome,
+        isExperience,
+      }}
+    >
       {children}
     </NavigationContext.Provider>
   )

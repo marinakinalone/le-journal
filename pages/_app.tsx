@@ -4,6 +4,8 @@ import { ReactNode } from 'react'
 import AudioProvider from '../main/providers/Audio'
 import ExperienceInfoProvider from '../main/providers/Experience'
 import NavigationProvider from '../main/providers/Navigation'
+import DeviceValidationProvider from '../main/providers/DeviceValidation'
+import useNavigation from '../main/hooks/useNavigation'
 
 interface AppProps extends NextAppProps {
   children: ReactNode
@@ -11,13 +13,26 @@ interface AppProps extends NextAppProps {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ExperienceInfoProvider>
-      <NavigationProvider>
-        <AudioProvider>
-          <Component {...pageProps} />
-        </AudioProvider>
-      </NavigationProvider>
-    </ExperienceInfoProvider>
+    <NavigationProvider>
+      <AppWithDeviceValidation>
+        <ExperienceInfoProvider>
+          <AudioProvider>
+            <Component {...pageProps} />
+          </AudioProvider>
+        </ExperienceInfoProvider>
+      </AppWithDeviceValidation>
+    </NavigationProvider>
+  )
+}
+
+// Wrapper component to access navigation context
+function AppWithDeviceValidation({ children }: { children: ReactNode }) {
+  const { currentExperienceId } = useNavigation()
+
+  return (
+    <DeviceValidationProvider experienceId={currentExperienceId}>
+      {children}
+    </DeviceValidationProvider>
   )
 }
 

@@ -1,13 +1,13 @@
 @import '../../styles/fonts', '../../styles/variables';
 
 .container {
-  background-image: url('/resources/home/noise.png');
+  background-image: url('/resources/le-journal/noise.png');
   min-height: 100vh;
 }
 
 .container::after {
   animation: grain 8s steps(10) infinite;
-  background-image: url('/resources/home/paper.png');
+  background-image: url('/resources/le-journal/paper.png');
   content: '';
   height: 300%;
   left: -50%;
@@ -57,15 +57,24 @@
   margin-right: 10%;
   margin-top: 0;
   padding-top: 5vh;
+  @media (max-width: 768px) {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
   h1 {
     font-size: 3.5rem;
+    margin-left: 8px;
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 }
 
 .entries {
   list-style-type: none;
   padding-left: 0.5rem;
-  font-size: 1.75rem;
+  // Keep ≥1rem (16px) for readability; scale down so long titles fit one line
+  font-size: clamp(1rem, 0.75rem + 1.6vw, 1.5rem);
 }
 
 .footer {
@@ -74,6 +83,10 @@
   position: fixed;
   bottom: 0;
   width: 80%;
+  @media (max-width: 768px) {
+    width: 90%;
+    font-size: 0.75rem;
+  }
   a,
   button {
     cursor: pointer;
@@ -270,6 +283,7 @@ $arrow-head-thickness: $shaft-thickness;
     > .text {
       margin: 0 $text-arrow-space 0 0;
       line-height: 1;
+      white-space: nowrap;
     }
 
     > .arrow {
