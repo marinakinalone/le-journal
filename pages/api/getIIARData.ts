@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getClientPromise from '../../experiences/internet-is-always-right/lib/mongodb'
+import getClientPromise from '../../lib/iiar/mongodb'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

@@ -4,13 +4,23 @@ A series of debates that we want to settle and who could a better judge than the
 
 ![Figma example — rainbow question cards](./assets/figma-example.png)
 
-## Table of Contents
+## Structure
 
-- [\[Internet is always right\]](#internet-is-always-right)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Built with](#built-with)
-  - [License](#license)
+```
+internet-is-always-right/
+  index.tsx
+  types.ts
+  components/
+  lib/          # client helpers (e.g. getRainbowClass)
+  styles/
+  README.md
+```
+
+Server Mongo helpers live in `lib/iiar/` at the repo root (used by `pages/api/*`).
+
+## Env
+
+- `MONGO_URI` — MongoDB connection string (server-only)
 
 ## Description
 

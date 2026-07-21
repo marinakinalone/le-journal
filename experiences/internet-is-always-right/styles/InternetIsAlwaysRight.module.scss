@@ -16,7 +16,8 @@ $color-bar-track: #ffffff;
 
 .main__container {
   background-color: $color-background;
-  background-image: linear-gradient($color-background-lines, 1px, transparent 1px),
+  background-image:
+    linear-gradient($color-background-lines, 1px, transparent 1px),
     linear-gradient(90deg, $color-background-lines, 1px, transparent 1px);
   background-size: 40px 40px;
   width: 100%;

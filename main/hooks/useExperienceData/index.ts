@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { IExperienceInfo, IExperienceMusic } from '../../data/experiencesTypes'
 import { ExperienceContext } from '../../providers/Experience'
 
-
 type FlexibleExperienceUpdate = Omit<Partial<IExperienceInfo>, 'hidden' | 'new' | 'music'> & {
   hidden?: boolean
   new?: boolean
@@ -14,7 +13,7 @@ const useExperienceData = () => {
 
   const updateCurrentExperienceData = (newContext: FlexibleExperienceUpdate) => {
     const normalizedContext = { ...newContext }
-    
+
     if ('hidden' in newContext) {
       if (newContext.hidden === false) {
         delete normalizedContext.hidden
@@ -22,7 +21,7 @@ const useExperienceData = () => {
         normalizedContext.hidden = true
       }
     }
-    
+
     if ('new' in newContext) {
       if (newContext.new === false) {
         delete normalizedContext.new
@@ -30,7 +29,7 @@ const useExperienceData = () => {
         normalizedContext.new = true
       }
     }
-    
+
     experienceContext.updateExperienceContext(normalizedContext as IExperienceInfo)
   }
 

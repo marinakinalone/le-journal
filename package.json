@@ -11,8 +11,9 @@
     "start": "next start",
     "lint": "eslint . && npm run typecheck",
     "lint:staged": "eslint $(git diff --cached --name-only --diff-filter=ACM \"*.ts\" \"*.tsx\" | sed 's| |\\\\ |g')",
-    "prettier": "prettier --write **/*.{ts,tsx}",
-    "prettier:staged": "prettier --write $(git diff --cached --name-only --diff-filter=ACM \"*.ts\" \"*.tsx\" | sed 's| |\\\\ |g')",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check .",
+    "prettier:staged": "prettier --write",
     "typecheck": "tsc --noEmit",
     "knip": "knip",
     "circular": "madge --circular --extensions ts,tsx --ts-config tsconfig.json ."

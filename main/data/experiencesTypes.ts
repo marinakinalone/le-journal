@@ -7,10 +7,14 @@ export interface IExperienceMusic {
 interface IExperienceMetadata {
   description: string
 }
+
 export interface IExperienceBasicData {
+  /** Must match the folder name under `experiences/` (and `public/resources/`). */
+  id: string
   hidden?: true
   new?: true
   title: string
+  /** `source` is the filename only; enrichment prefixes `/resources/<id>/`. */
   music?: IExperienceMusic
   metadata: IExperienceMetadata
   config: {
@@ -24,7 +28,7 @@ interface IExperienceFavicons {
   favicon32: string
   appleTouchIcon: string
 }
+
 export interface IExperienceInfo extends IExperienceBasicData {
-  id: string
   favicons: IExperienceFavicons
 }

@@ -30,6 +30,30 @@ npm install
 npm run dev
 ```
 
+## Project structure
+
+| Path                     | Role                                                 |
+| ------------------------ | ---------------------------------------------------- |
+| `pages/`                 | Routes and API handlers                              |
+| `main/`                  | App shell: registry, providers, shared UI            |
+| `experiences/<id>/`      | One experience module per folder (`index.tsx` entry) |
+| `lib/`                   | Shared server helpers (e.g. `lib/iiar/`)             |
+| `public/resources/<id>/` | Per-experience static assets                         |
+
+Register experiences in `main/data/experiences.ts` with an explicit `id` matching the folder name. Append new entries at the end (Home shows newest first).
+
+Suggested experience layout:
+
+```
+experiences/<id>/
+  index.tsx
+  types.ts            # when needed
+  components/         # when more than a couple of UI pieces
+  lib/ or data/       # client IO vs static data
+  styles/<Name>.module.scss
+  README.md
+```
+
 ## Resources
 
 - https://css-tricks.com/snippets/css/animated-grainy-texture/

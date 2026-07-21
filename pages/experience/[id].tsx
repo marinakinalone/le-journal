@@ -2,27 +2,39 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Loader from '../../main/components/Loader'
+import { experiences, loadableExperienceIds } from '../../main/data'
 import useExperienceData from '../../main/hooks/useExperienceData'
-import { experiences } from '../../main/data'
 
 const ExperiencePage = () => {
   const router = useRouter()
   const { id } = router.query
   const { updateCurrentExperienceData } = useExperienceData()
 
+  const experienceId = typeof id === 'string' ? id : null
+  const isLoadable = experienceId !== null && loadableExperienceIds.includes(experienceId)
+
   useEffect(() => {
-    if (id && typeof id === 'string') {
-      const experience = experiences.find((exp) => exp.id === id)
-      if (experience) {
-        updateCurrentExperienceData({
-          ...experience,
-        })
-      }
+    if (!experienceId) return
+
+    const experience = experiences.find((exp) => exp.id === experienceId)
+    if (experience) {
+      updateCurrentExperienceData({ ...experience })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [experienceId])
 
-  const ExperienceComponent = dynamic(() => import(`../../experiences/${id}/index.tsx`), {
+  useEffect(() => {
+    if (!router.isReady || !experienceId) return
+    if (!isLoadable) {
+      router.replace('/')
+    }
+  }, [router, experienceId, isLoadable])
+
+  if (!experienceId || !isLoadable) {
+    return <Loader />
+  }
+
+  const ExperienceComponent = dynamic(() => import(`../../experiences/${experienceId}/index.tsx`), {
     loading: () => <Loader />,
     ssr: false,
   })

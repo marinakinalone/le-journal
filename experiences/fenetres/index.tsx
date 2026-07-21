@@ -6,7 +6,7 @@ import Loading from './Loading'
 import Window from './Window'
 import styles from './styles/Fenetres.module.scss'
 import { IWindow, IWindowInfo } from './types'
-import { storage } from './utils/firebase'
+import { storage } from './lib/firebase'
 
 const FIREBASE_FOLDER = 'fenetres'
 
@@ -36,7 +36,6 @@ const Fenêtres = () => {
   const fetchWindowList = async () => {
     const listRef = ref(storage, FIREBASE_FOLDER)
     try {
-      console.log('windowsList:')
       const windowsList = await listAll(listRef)
       const urls = await Promise.all(
         windowsList.items.map(async (item) => {

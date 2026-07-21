@@ -348,7 +348,7 @@ export const palettes: IPalette[] = [
     colors: {
       background: '#cc725c',
       primary: '#e8e1e3',
-      accents: ['#e0c1ba', '#f5bb27','#e89f74'],
+      accents: ['#e0c1ba', '#f5bb27', '#e89f74'],
     },
   },
   {

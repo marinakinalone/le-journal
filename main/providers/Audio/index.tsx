@@ -1,29 +1,16 @@
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 import AudioPlayer from '../../components/AudioPlayer'
 import useExperienceData from '../../hooks/useExperienceData'
 
-interface IAudioContext {
-  startAudio: boolean
-  setStartAudio: React.Dispatch<React.SetStateAction<boolean>>
-  children?: ReactNode
-}
-
-export const CustomAudioContext = createContext<IAudioContext | null>(null)
-
 const AudioProvider = ({ children }: { children: ReactNode }) => {
-  const [startAudio, setStartAudio] = useState(true)
   const { music } = useExperienceData()
+  const musicSource = music?.source
 
   return (
-    <CustomAudioContext.Provider
-      value={{
-        startAudio,
-        setStartAudio,
-      }}
-    >
-      {startAudio && music && <AudioPlayer source={music.source} />}
+    <>
+      {musicSource ? <AudioPlayer source={musicSource} /> : null}
       {children}
-    </CustomAudioContext.Provider>
+    </>
   )
 }
 

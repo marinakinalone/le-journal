@@ -1,0 +1,9 @@
+# Prettier
+.next
+node_modules
+out
+build
+coverage
+package-lock.json
+*.min.js
+public

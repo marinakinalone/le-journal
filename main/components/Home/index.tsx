@@ -1,28 +1,25 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { experiences } from '../../data'
+import useExperienceData from '../../hooks/useExperienceData'
 import styles from '../../styles/Main.module.scss'
 import LinkToExperience from '../LinkToExperience'
 import Title from '../Title'
 
+const homeExperience = experiences.find((experience) => experience.id === 'le-journal')
+
 const Home: NextPage = () => {
-  // TODO add modal back
-  // const [displayModal, setDisplayModal] = useState(false)
-  // const openModal = () => setDisplayModal(true)
+  const { updateCurrentExperienceData } = useExperienceData()
 
-  // useEffect(() => {
-  //   const handleKeyDown = (event: { key: string }) => {
-  //     if (event.key === 'Escape') {
-  //       setDisplayModal(false)
-  //     }
-  //   }
-  //   window.addEventListener('keydown', handleKeyDown)
+  useEffect(() => {
+    if (homeExperience) {
+      updateCurrentExperienceData({ ...homeExperience })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  //   return () => {
-  //     window.removeEventListener('keydown', handleKeyDown)
-  //   }
-  // }, [displayModal])
+  const visibleExperiences = [...experiences].filter((experience) => !experience.hidden).reverse()
 
   return (
     <div className={styles.container}>
@@ -35,11 +32,9 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <Title />
         <ul className={styles.entries}>
-          {experiences.map((experience, index) => {
-            if (!experience.hidden) {
-              return <LinkToExperience key={experience.id} index={index} {...experience} />
-            }
-          })}
+          {visibleExperiences.map((experience, index) => (
+            <LinkToExperience key={experience.id} index={index} {...experience} />
+          ))}
         </ul>
         <footer className={styles.footer}>
           <p>

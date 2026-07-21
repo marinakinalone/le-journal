@@ -17,5 +17,3 @@ export const isLandscapeOrientation = () => {
   }
   return false
 }
-
-

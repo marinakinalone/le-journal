@@ -33,23 +33,27 @@ const ExperienceInfoProvider = ({ children }: { children: ReactNode }) => {
       <Head>
         <title>{experienceContext.title}</title>
         <meta name="description" content={experienceContext.metadata.description} />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={experienceContext.favicons.appleTouchIcon}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={experienceContext.favicons.favicon32}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={experienceContext.favicons.favicon16}
-        />
+        {experienceContext.id !== 'le-journal' && (
+          <>
+            <link
+              rel="apple-touch-icon"
+              sizes="180x180"
+              href={experienceContext.favicons.appleTouchIcon}
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href={experienceContext.favicons.favicon32}
+            />
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href={experienceContext.favicons.favicon16}
+            />
+          </>
+        )}
       </Head>
       <main>{children}</main>
     </ExperienceContext.Provider>

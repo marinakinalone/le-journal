@@ -1,17 +1,8 @@
 import { useRouter } from 'next/router'
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { PATH } from '../../constants'
 import { experiences } from '../../data'
 import { isLandscapeOrientation, isMobileDevice } from './utils'
-
-export interface IDeviceValidationContext {
-  isLandscape: boolean
-  isMobile: boolean
-  isFormatSupported: boolean
-  shouldShowNotSupported: boolean
-}
-
-export const DeviceValidationContext = createContext<IDeviceValidationContext | null>(null)
 
 const { NOT_SUPPORTED, HOME } = PATH
 
@@ -21,44 +12,55 @@ interface DeviceValidationProviderProps {
 }
 
 const DeviceValidationProvider = ({ children, experienceId }: DeviceValidationProviderProps) => {
-  const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation())
+  const [isLandscape, setIsLandscape] = useState(isLandscapeOrientation)
   const [savedPath, setSavedPath] = useState('')
+  // Keep the experience that triggered the gate — router clears id on /format-not-supported
+  const [blockedExperienceId, setBlockedExperienceId] = useState<string | null>(null)
   const router = useRouter()
+  const isRedirecting = useRef(false)
 
-  const isMobile = isMobileDevice() ?? false
-  const isSupportedDevice = !isMobile
+  const isSupportedDevice = !(isMobileDevice() ?? false)
 
-  // Get experience config
-  const experience = experienceId
-    ? experiences.find((exp) => exp.id === experienceId)
+  const validationExperienceId =
+    experienceId ?? (router.pathname === NOT_SUPPORTED ? blockedExperienceId : null)
+
+  const experience = validationExperienceId
+    ? experiences.find((exp) => exp.id === validationExperienceId)
     : null
-
   const config = experience?.config
 
-  // Calculate if format is supported
-  const isFormatSupported = React.useMemo(() => {
-    if (!config || !experienceId) return true
+  const isFormatSupported = useMemo(() => {
+    if (!config || !validationExperienceId) return true
 
     const { isPortraitFormatAccepted, shouldSupportAllFormats } = config
 
     if (!shouldSupportAllFormats) {
-      // Desktop only + format check
       return isSupportedDevice && (isLandscape || isPortraitFormatAccepted)
     }
 
-    // Format check only
     return isLandscape || isPortraitFormatAccepted
-  }, [config, isLandscape, isSupportedDevice, experienceId])
+  }, [config, isLandscape, isSupportedDevice, validationExperienceId])
 
-  const shouldShowNotSupported = !isFormatSupported && !!experienceId
+  const shouldShowNotSupported = !isFormatSupported && !!validationExperienceId
 
-  // Handle format validation and redirection
   useEffect(() => {
-    if (router.asPath !== NOT_SUPPORTED) {
+    if (experienceId) {
+      setBlockedExperienceId(experienceId)
+    }
+  }, [experienceId])
+
+  useEffect(() => {
+    if (router.pathname === HOME) {
+      setBlockedExperienceId(null)
+      setSavedPath('')
+    }
+  }, [router.pathname])
+
+  useEffect(() => {
+    if (router.asPath !== NOT_SUPPORTED && router.pathname === '/experience/[id]') {
       setSavedPath(router.asPath)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath])
+  }, [router.asPath, router.pathname])
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,28 +80,26 @@ const DeviceValidationProvider = ({ children, experienceId }: DeviceValidationPr
   }, [])
 
   useEffect(() => {
-    if (shouldShowNotSupported && router.pathname !== NOT_SUPPORTED) {
-      router.push(NOT_SUPPORTED)
-    } else if (!shouldShowNotSupported && router.pathname === NOT_SUPPORTED && savedPath) {
-      router.push(savedPath !== NOT_SUPPORTED ? savedPath : HOME)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldShowNotSupported, router.pathname])
+    if (!router.isReady || isRedirecting.current) return
 
-  return (
-    <DeviceValidationContext.Provider
-      value={{
-        isLandscape,
-        isMobile,
-        isFormatSupported,
-        shouldShowNotSupported,
-      }}
-    >
-      {children}
-    </DeviceValidationContext.Provider>
-  )
+    if (shouldShowNotSupported && router.pathname !== NOT_SUPPORTED) {
+      isRedirecting.current = true
+      void router.replace(NOT_SUPPORTED).finally(() => {
+        isRedirecting.current = false
+      })
+      return
+    }
+
+    if (!shouldShowNotSupported && router.pathname === NOT_SUPPORTED) {
+      const destination = savedPath && savedPath !== NOT_SUPPORTED ? savedPath : HOME
+      isRedirecting.current = true
+      void router.replace(destination).finally(() => {
+        isRedirecting.current = false
+      })
+    }
+  }, [shouldShowNotSupported, router, savedPath])
+
+  return <>{children}</>
 }
 
 export default DeviceValidationProvider
-
-

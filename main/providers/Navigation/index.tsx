@@ -13,6 +13,7 @@ export interface INavigationContext {
 export const NavigationContext = createContext<INavigationContext | null>(null)
 
 const { HOME } = PATH
+const NOT_SUPPORTED = PATH.NOT_SUPPORTED
 
 const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -35,11 +36,11 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
     router.pathname === '/experience/[id]' ? (router.query.id as string) || null : null
   const isHome = router.pathname === HOME
   const isExperience = router.pathname === '/experience/[id]'
+  const isFormatNotSupported = router.pathname === NOT_SUPPORTED
 
-  // Handle Escape key to go back home from experiences
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isExperience) {
+      if (event.key === 'Escape' && (isExperience || isFormatNotSupported)) {
         redirectToHome()
       }
     }
@@ -47,7 +48,7 @@ const NavigationProvider = ({ children }: { children: ReactNode }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isExperience, redirectToHome])
+  }, [isExperience, isFormatNotSupported, redirectToHome])
 
   return (
     <NavigationContext.Provider

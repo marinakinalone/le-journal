@@ -29,7 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 function AppWithDeviceValidation({ children }: { children: ReactNode }) {
   const { currentExperienceId } = useNavigation()
 
-  return <DeviceValidationProvider experienceId={currentExperienceId}>{children}</DeviceValidationProvider>
+  return (
+    <DeviceValidationProvider experienceId={currentExperienceId}>
+      {children}
+    </DeviceValidationProvider>
+  )
 }
 
 export default MyApp

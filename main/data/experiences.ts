@@ -1,7 +1,13 @@
 import { IExperienceBasicData } from './experiencesTypes'
 
+/**
+ * Registry order is chronological (oldest → newest).
+ * Home displays non-hidden entries newest-first.
+ * Append new experiences at the end. `id` must match `experiences/<id>/`.
+ */
 export const experiencesData: IExperienceBasicData[] = [
   {
+    id: 'le-journal',
     hidden: true,
     title: 'le-journal',
     metadata: {
@@ -13,6 +19,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'jardinage-graphique',
     title: 'jardinage graphique',
     metadata: {
       description:
@@ -24,6 +31,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'palettes',
     title: 'palettes',
     metadata: {
       description:
@@ -35,6 +43,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'fenetres',
     title: 'fenêtres',
     metadata: {
       description: 'window views from different places, a collection of memories',
@@ -45,6 +54,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'internet-is-always-right',
     new: true,
     title: 'internet is always right',
     metadata: {
@@ -57,6 +67,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'une-minute',
     new: true,
     hidden: true,
     title: 'une minute',
@@ -69,6 +80,7 @@ export const experiencesData: IExperienceBasicData[] = [
     },
   },
   {
+    id: 'digital-quilts',
     new: true,
     hidden: true,
     title: 'digital quilts',

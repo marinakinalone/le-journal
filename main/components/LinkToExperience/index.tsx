@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import Link from 'next/link'
 import React from 'react'
+import { IExperienceInfo } from '../../data/experiencesTypes'
 import useExperienceData from '../../hooks/useExperienceData'
 import styles from '../../styles/Main.module.scss'
 
@@ -8,10 +9,7 @@ const NewExperienceLabel = () => {
   return <span>*NEW* </span>
 }
 
-interface ILinkToExperience {
-  title: string
-  id: string
-  new?: boolean
+interface ILinkToExperience extends IExperienceInfo {
   index: number
 }
 

@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
-import getClientPromise from '../../experiences/internet-is-always-right/lib/mongodb'
+import getClientPromise from '../../lib/iiar/mongodb'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -18,11 +18,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const db = client.db('internetIsAlwaysRight')
     const voteField = answer === 1 ? 'answer1.numberOfVotes' : 'answer2.numberOfVotes'
 
-    const result = await db.collection('questions').findOneAndUpdate(
-      { _id: new ObjectId(id) },
-      { $inc: { [voteField]: 1, totalNumberOfVotes: 1 } },
-      { returnDocument: 'after' },
-    )
+    const result = await db
+      .collection('questions')
+      .findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $inc: { [voteField]: 1, totalNumberOfVotes: 1 } },
+        { returnDocument: 'after' },
+      )
 
     if (!result) {
       return res.status(404).json({ message: 'Question not found' })

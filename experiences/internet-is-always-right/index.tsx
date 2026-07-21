@@ -4,27 +4,10 @@ import Header from './components/Header'
 import QuestionCard from './components/QuestionCard'
 import ResultCard from './components/ResultCard'
 import styles from './styles/InternetIsAlwaysRight.module.scss'
-
-interface IOption {
-  label: string
-  numberOfVotes: number
-  comment?: string
-  commentaire?: string
-}
-
-interface IDataItem {
-  _id: string
-  question: string
-  answer1: IOption
-  answer2: IOption
-  totalNumberOfVotes: number
-  hasAnswered: boolean
-}
+import { getComment, IDataItem } from './types'
 
 const COOKIE_DAYS = 365
 const cookieName = (id: string) => `iiar-question-${id}`
-
-const getComment = (option: IOption) => option.commentaire ?? option.comment ?? ''
 
 const InternetIsAlwaysRight = () => {
   const [data, setData] = useState<IDataItem[]>([])
@@ -138,7 +121,8 @@ const InternetIsAlwaysRight = () => {
           </React.Fragment>
         ))}
       <p className={styles.cookie__notice}>
-        Un cookie local mémorise les votes pour éviter les doublons (1 an, pas de suivi publicitaire).
+        Un cookie local mémorise les votes pour éviter les doublons (1 an, pas de suivi
+       publicitaire).
       </p>
     </div>
   )
