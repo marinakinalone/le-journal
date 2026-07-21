@@ -69,7 +69,6 @@ export const experiencesData: IExperienceBasicData[] = [
   {
     id: 'une-minute',
     new: true,
-    hidden: true,
     title: 'une minute',
     metadata: {
       description: 'TBD', // TODO Add description
