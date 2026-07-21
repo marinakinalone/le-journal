@@ -2,6 +2,7 @@ import cx from 'classnames'
 import React from 'react'
 import { getRainbowClass } from '../../lib/getRainbowClass'
 import styles from '../../styles/InternetIsAlwaysRight.module.scss'
+import { formatComment, UserAnswer } from '../../types'
 import StatBar from './StatBar'
 
 interface IResultCard {
@@ -12,6 +13,7 @@ interface IResultCard {
   leftComment: string
   rightComment: string
   colorIndex: number
+  userAnswer?: UserAnswer
 }
 
 const getPercents = (left: number, right: number, total: number) => {
@@ -28,6 +30,7 @@ const ResultCard = ({
   leftComment,
   rightComment,
   colorIndex,
+  userAnswer,
 }: IResultCard) => {
   const { leftPercent, rightPercent } = getPercents(leftVotes, rightVotes, totalVotes)
 
@@ -37,8 +40,11 @@ const ResultCard = ({
       <StatBar
         leftPercent={leftPercent}
         rightPercent={rightPercent}
-        leftComment={leftComment}
-        rightComment={rightComment}
+        leftVotes={leftVotes}
+        rightVotes={rightVotes}
+        leftComment={formatComment(leftComment, leftPercent)}
+        rightComment={formatComment(rightComment, rightPercent)}
+        userAnswer={userAnswer}
       />
     </div>
   )

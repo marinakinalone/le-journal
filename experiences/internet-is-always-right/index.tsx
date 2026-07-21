@@ -4,10 +4,19 @@ import Header from './components/Header'
 import QuestionCard from './components/QuestionCard'
 import ResultCard from './components/ResultCard'
 import styles from './styles/InternetIsAlwaysRight.module.scss'
-import { getComment, IDataItem } from './types'
+import { getComment, IDataItem, UserAnswer } from './types'
 
 const COOKIE_DAYS = 365
 const cookieName = (id: string) => `iiar-question-${id}`
+
+const parseUserAnswer = (value: string | undefined): UserAnswer | undefined => {
+  if (value === '1') return 1
+  if (value === '2') return 2
+  return undefined
+}
+
+const hasVoted = (value: string | undefined) =>
+  value === 'true' || value === '1' || value === '2'
 
 const InternetIsAlwaysRight = () => {
   const [data, setData] = useState<IDataItem[]>([])
@@ -30,8 +39,13 @@ const InternetIsAlwaysRight = () => {
 
         const updatedResult = result.map((item: IDataItem) => {
           const id = String(item._id)
-          const hasAnswered = Cookies.get(cookieName(id)) === 'true'
-          return { ...item, _id: id, hasAnswered }
+          const cookie = Cookies.get(cookieName(id))
+          return {
+            ...item,
+            _id: id,
+            hasAnswered: hasVoted(cookie),
+            userAnswer: parseUserAnswer(cookie),
+          }
         })
 
         setData(updatedResult)
@@ -46,8 +60,8 @@ const InternetIsAlwaysRight = () => {
     fetchData()
   }, [])
 
-  const handleVote = async (id: string, answer: 1 | 2) => {
-    if (Cookies.get(cookieName(id)) === 'true' || votingId !== null) return
+  const handleVote = async (id: string, answer: UserAnswer) => {
+    if (hasVoted(Cookies.get(cookieName(id))) || votingId !== null) return
 
     setVotingId(id)
     try {
@@ -62,7 +76,7 @@ const InternetIsAlwaysRight = () => {
       }
 
       const updated = await res.json()
-      Cookies.set(cookieName(id), 'true', { expires: COOKIE_DAYS })
+      Cookies.set(cookieName(id), String(answer), { expires: COOKIE_DAYS })
 
       setData((prev) =>
         prev.map((item) =>
@@ -73,6 +87,7 @@ const InternetIsAlwaysRight = () => {
                 answer2: updated.answer2 ?? item.answer2,
                 totalNumberOfVotes: updated.totalNumberOfVotes ?? item.totalNumberOfVotes + 1,
                 hasAnswered: true,
+                userAnswer: answer,
               }
             : item,
         ),
@@ -107,6 +122,7 @@ const InternetIsAlwaysRight = () => {
                 leftComment={getComment(item.answer1)}
                 rightComment={getComment(item.answer2)}
                 colorIndex={index}
+                userAnswer={item.userAnswer}
               />
             ) : (
               <QuestionCard
